@@ -1,0 +1,246 @@
+<html class="dark"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f97415",
+                        "background-light": "#f8f7f5",
+                        "background-dark": "#23170f",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(249, 116, 21, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(249, 116, 21, 0.1);
+        }
+        .sidebar-item-active {
+            background: linear-gradient(90deg, rgba(249, 116, 21, 0.2) 0%, rgba(249, 116, 21, 0) 100%);
+            border-left: 4px solid #f97415;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar (Desktop) -->
+<aside class="hidden lg:flex flex-col w-72 bg-background-light dark:bg-background-dark border-r border-primary/10 p-6 shrink-0">
+<div class="flex items-center gap-3 mb-10">
+<div class="bg-primary p-2 rounded-lg">
+<span class="material-symbols-outlined text-white">school</span>
+</div>
+<div>
+<h1 class="text-lg font-bold leading-none">Paul University</h1>
+<p class="text-xs text-primary font-medium uppercase tracking-wider">QuickTest CBT</p>
+</div>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg sidebar-item-active text-primary" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-primary/10 transition-colors" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-medium text-slate-600 dark:text-slate-400">History</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-primary/10 transition-colors" href="#">
+<span class="material-symbols-outlined">admin_panel_settings</span>
+<span class="font-medium text-slate-600 dark:text-slate-400">Admin</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-primary/10 transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-medium text-slate-600 dark:text-slate-400">Settings</span>
+</a>
+</nav>
+<div class="pt-6 border-t border-primary/10">
+<div class="flex items-center gap-3 p-3 rounded-xl bg-primary/5">
+<div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center overflow-hidden">
+<img alt="Student Profile" data-alt="Student profile picture avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCT6ATjEMnN8EgowDpjPjl2LzZT0OWZVNiM-KwxPuRNx8M28NUvm61ii0ZUapJLj3FzuaqCqFEHbzEiLiKMw5r3FlpxWSjtS90Wn7c1_Ppt7Bhza42dTn8dFIAUbB3tSMYuEygUkKHlNbYI4DobBN_AcETSx1D_Ahr7WHl5HBDUAIBPfkV98P5kvMF4a5xuGH8q2uFoJ_tmSd6U_FgYjIxLs7Jkpdacm_uzJrZZ1K6lYoZyGrjTt1knDGuobvfrmc5tkXPznojz2dL"/>
+</div>
+<div class="overflow-hidden">
+<p class="text-sm font-bold truncate">Paulite Student</p>
+<p class="text-xs text-slate-500">Awka Campus</p>
+</div>
+</div>
+<p class="mt-4 text-[10px] text-center text-slate-500 font-medium uppercase tracking-tighter">
+                    Made by Gbengaayo Olawale
+                </p>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col overflow-y-auto bg-background-light dark:bg-background-dark pb-24 lg:pb-0">
+<!-- Header -->
+<header class="flex items-center justify-between px-6 py-6 lg:px-10">
+<div>
+<h2 class="text-2xl lg:text-3xl font-extrabold tracking-tight">Welcome, Paulite!</h2>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Ready to crush your exams today?</p>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-primary/10 text-slate-500 transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full border-2 border-background-dark"></span>
+</button>
+<button class="hidden lg:flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-lg shadow-primary/20 hover:scale-105 transition-transform active:scale-95">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                        New Session
+                    </button>
+</div>
+</header>
+<!-- Bento Grid Content -->
+<div class="px-6 lg:px-10 grid grid-cols-1 md:grid-cols-3 gap-6 pb-10">
+<!-- Main Setup Card (Span 2) -->
+<section class="md:col-span-2 glass-card rounded-3xl p-6 lg:p-8 border-2 border-primary/20 relative overflow-hidden">
+<div class="absolute -top-24 -right-24 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
+<div class="relative z-10">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary text-3xl">psychology</span>
+<h3 class="text-xl font-bold">Custom Quiz Setup</h3>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+<div class="space-y-2">
+<label class="text-xs font-bold uppercase tracking-wider text-slate-500 ml-1">Select Course</label>
+<div class="relative">
+<select class="w-full bg-slate-100 dark:bg-background-dark/50 border border-primary/10 rounded-xl px-4 py-3 appearance-none focus:ring-primary focus:border-primary transition-all">
+<option>GST 101 - Use of English</option>
+<option>CSC 121 - Intro to Programming</option>
+<option>MAT 102 - Calculus</option>
+<option>PHY 101 - General Physics</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">expand_more</span>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-bold uppercase tracking-wider text-slate-500 ml-1">Select Topic</label>
+<div class="relative">
+<select class="w-full bg-slate-100 dark:bg-background-dark/50 border border-primary/10 rounded-xl px-4 py-3 appearance-none focus:ring-primary focus:border-primary transition-all">
+<option>All Topics</option>
+<option>Grammar &amp; Syntax</option>
+<option>Vocabulary Development</option>
+<option>Comprehension</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">expand_more</span>
+</div>
+</div>
+<div class="sm:col-span-2 space-y-2">
+<label class="text-xs font-bold uppercase tracking-wider text-slate-500 ml-1">Difficulty Level</label>
+<div class="grid grid-cols-3 gap-3">
+<button class="py-3 rounded-xl border border-primary/10 bg-slate-100 dark:bg-background-dark/50 hover:bg-primary/5 hover:border-primary/40 font-medium transition-all text-sm">Easy</button>
+<button class="py-3 rounded-xl border-2 border-primary bg-primary/10 font-bold text-primary transition-all text-sm">Medium</button>
+<button class="py-3 rounded-xl border border-primary/10 bg-slate-100 dark:bg-background-dark/50 hover:bg-primary/5 hover:border-primary/40 font-medium transition-all text-sm">Hard</button>
+</div>
+</div>
+</div>
+<button class="w-full bg-primary text-white py-4 rounded-2xl font-black text-lg shadow-xl shadow-primary/30 hover:shadow-primary/40 hover:-translate-y-1 transition-all active:scale-95 flex items-center justify-center gap-3">
+                            Start Now
+                            <span class="material-symbols-outlined">rocket_launch</span>
+</button>
+</div>
+</section>
+<!-- Stats Card -->
+<section class="bg-slate-100 dark:bg-white/5 rounded-3xl p-6 border border-primary/5">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-bold text-lg">Your Progress</h3>
+<span class="material-symbols-outlined text-primary">trending_up</span>
+</div>
+<div class="space-y-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-2xl bg-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">task_alt</span>
+</div>
+<div>
+<p class="text-2xl font-black">1,248</p>
+<p class="text-xs text-slate-500 font-medium uppercase tracking-wider">Solved</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-2xl bg-green-500/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-green-500">track_changes</span>
+</div>
+<div>
+<p class="text-2xl font-black">84.2%</p>
+<p class="text-xs text-slate-500 font-medium uppercase tracking-wider">Accuracy</p>
+</div>
+</div>
+<div class="pt-4 border-t border-primary/10">
+<div class="flex justify-between text-xs font-bold mb-2 uppercase tracking-wider">
+<span>Weekly Goal</span>
+<span class="text-primary">75%</span>
+</div>
+<div class="w-full bg-slate-200 dark:bg-background-dark rounded-full h-2 overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 75%"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Info Card -->
+<section class="glass-card rounded-3xl p-6 border border-primary/10 flex flex-col justify-between">
+<div>
+<div class="bg-primary/10 w-10 h-10 rounded-lg flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-primary">shuffle</span>
+</div>
+<h3 class="font-bold text-lg mb-2">Randomized CBT</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                            Questions and options are shuffled dynamically to prevent <span class="text-primary font-medium">memorization bias</span> and ensure genuine learning.
+                        </p>
+</div>
+<div class="mt-6 flex items-center gap-2 text-xs font-bold text-primary cursor-pointer hover:gap-3 transition-all">
+                        LEARN MORE ABOUT ALGORITHM 
+                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</div>
+</section>
+<!-- Quick Tips Card -->
+<section class="md:col-span-2 bg-gradient-to-br from-primary/20 to-transparent rounded-3xl p-6 border border-primary/10 flex flex-col md:flex-row items-center gap-6">
+<div class="flex-1 text-center md:text-left">
+<h3 class="font-bold text-lg mb-2">Study Tip of the Day</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 italic">
+                            "The best way to master KaTeX math expressions is to practice writing them during your review sessions. Visualizing the structure helps long-term retention."
+                        </p>
+</div>
+<div class="bg-background-dark p-4 rounded-2xl border border-primary/20 shrink-0">
+<code class="text-primary text-sm font-mono">\[ x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} \]</code>
+</div>
+</section>
+</div>
+</main>
+</div>
+<!-- Mobile Navigation Bar -->
+<div class="lg:hidden fixed bottom-0 left-0 right-0 bg-background-light dark:bg-background-dark/80 backdrop-blur-lg border-t border-primary/10 px-6 py-4 z-50">
+<div class="flex items-center justify-between">
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="text-[10px] font-bold uppercase tracking-wider">Home</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="text-[10px] font-bold uppercase tracking-wider">History</span>
+</a>
+<div class="relative -top-10">
+<button class="w-16 h-16 bg-primary rounded-full border-4 border-background-dark flex items-center justify-center shadow-lg shadow-primary/40 text-white">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+</div>
+<a class="flex flex-col items-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined">admin_panel_settings</span>
+<span class="text-[10px] font-bold uppercase tracking-wider">Admin</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-slate-500" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-bold uppercase tracking-wider">Profile</span>
+</a>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>QuickTest Interactive Math Quiz | Paul University</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f97415",
+                        "background-light": "#f8f7f5",
+                        "background-dark": "#23170f",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+        .math-font {
+            font-family: "Times New Roman", Times, serif;
+            font-style: italic;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(249, 116, 21, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col font-display">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 w-full border-b border-primary/10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-4 lg:px-40 py-4">
+<div class="max-w-[1200px] mx-auto flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="bg-primary p-1.5 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-xl">functions</span>
+</div>
+<div>
+<h1 class="text-slate-900 dark:text-white text-lg font-bold leading-none tracking-tight">QuickTest</h1>
+<p class="text-xs text-slate-500 dark:text-primary/70 font-medium">Paul University, Awka</p>
+</div>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<nav class="flex items-center gap-6">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Courses</a>
+<a class="text-sm font-medium text-primary" href="#">Live Quiz</a>
+</nav>
+<div class="h-10 w-10 rounded-full border-2 border-primary/20 overflow-hidden bg-primary/10">
+<img class="w-full h-full object-cover" data-alt="User profile avatar of a student" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmPZxVSrjQVey-L-qfFSY68zy9WCPjwnWgAfFDrhsCA4LDLyzNtI0RbYAotLoflhhze22vHwF3ne7YX2bQdBEHyJ7RjZRi2w_1Zji4W7ucgiD7l5tXca6PMI4psU8gCOjZ-lyTPlki9gUU25FOUgQrrxearNqC4zLz9Hkoaa9t0ZGw4KP4Uq-di96MjSCzLKRodoNflIlJDsH4-DcLarU0w757ypAFqVEFVPYJ4egO9vRXb8-S6U5XcH3Uy_hmBFFIegCen1D-_zWp"/>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 w-full max-w-[960px] mx-auto px-4 py-8">
+<!-- Progress & Timer Section -->
+<div class="mb-8 space-y-6">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex-1">
+<div class="flex justify-between items-end mb-2">
+<span class="text-sm font-semibold text-primary">Question 13 of 20</span>
+<span class="text-sm font-medium text-slate-500">65% Completed</span>
+</div>
+<div class="h-2 w-full bg-primary/10 rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full transition-all duration-500" style="width: 65%;"></div>
+</div>
+</div>
+<div class="flex gap-2">
+<div class="bg-slate-100 dark:bg-primary/5 border border-primary/10 rounded-xl px-4 py-2 flex items-center gap-3 min-w-[140px]">
+<span class="material-symbols-outlined text-primary">timer</span>
+<div class="flex items-baseline gap-1">
+<span class="text-xl font-bold tabular-nums">12:45</span>
+<span class="text-[10px] uppercase font-bold text-slate-400">Rem</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Question Card -->
+<div class="glass-card rounded-xl p-6 md:p-10 mb-8 shadow-2xl shadow-primary/5">
+<div class="flex items-center gap-2 mb-6">
+<span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full uppercase tracking-wider">Calculus II</span>
+<span class="px-3 py-1 bg-slate-100 dark:bg-white/5 text-slate-500 dark:text-slate-400 text-xs font-bold rounded-full uppercase tracking-wider">Hard</span>
+</div>
+<h2 class="text-xl md:text-2xl font-semibold mb-8 leading-relaxed">
+                Evaluate the following definite integral to find the area under the curve between the given limits:
+            </h2>
+<!-- LaTeX Rendering Simulation -->
+<div class="flex justify-center py-12 px-4 rounded-xl bg-primary/5 border border-primary/5 mb-8">
+<div class="math-font text-3xl md:text-5xl text-slate-900 dark:text-white flex items-center gap-2 select-none">
+<span class="text-5xl md:text-7xl font-light leading-none">∫</span>
+<div class="flex flex-col items-center -ml-2 text-sm md:text-base font-bold">
+<span>2</span>
+<span class="mt-8">0</span>
+</div>
+<span class="ml-2">(3x² + 2x) dx</span>
+</div>
+</div>
+<div class="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-sm italic">
+<span class="material-symbols-outlined text-sm">info</span>
+<span>Hint: Use the Power Rule for integration: ∫xⁿ dx = (xⁿ⁺¹)/(n+1)</span>
+</div>
+</div>
+<!-- Options Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
+<label class="group relative cursor-pointer">
+<input checked="" class="peer sr-only" name="quiz_option" type="radio"/>
+<div class="h-full flex items-center gap-4 p-5 rounded-xl border-2 border-slate-200 dark:border-primary/10 bg-transparent hover:border-primary/40 peer-checked:border-primary peer-checked:bg-primary/5 transition-all">
+<div class="flex-shrink-0 w-10 h-10 rounded-lg bg-slate-100 dark:bg-primary/10 flex items-center justify-center text-lg font-bold text-slate-600 dark:text-primary peer-checked:bg-primary peer-checked:text-white">A</div>
+<div class="flex flex-col">
+<span class="text-lg font-bold">12</span>
+<span class="text-sm text-slate-500 dark:text-slate-400">The definite integral equals 12 units²</span>
+</div>
+</div>
+</label>
+<label class="group relative cursor-pointer">
+<input class="peer sr-only" name="quiz_option" type="radio"/>
+<div class="h-full flex items-center gap-4 p-5 rounded-xl border-2 border-slate-200 dark:border-primary/10 bg-transparent hover:border-primary/40 peer-checked:border-primary peer-checked:bg-primary/5 transition-all">
+<div class="flex-shrink-0 w-10 h-10 rounded-lg bg-slate-100 dark:bg-primary/10 flex items-center justify-center text-lg font-bold text-slate-600 dark:text-primary peer-checked:bg-primary peer-checked:text-white">B</div>
+<div class="flex flex-col">
+<span class="text-lg font-bold">10</span>
+<span class="text-sm text-slate-500 dark:text-slate-400">The result of the integral evaluation is 10</span>
+</div>
+</div>
+</label>
+<label class="group relative cursor-pointer">
+<input class="peer sr-only" name="quiz_option" type="radio"/>
+<div class="h-full flex items-center gap-4 p-5 rounded-xl border-2 border-slate-200 dark:border-primary/10 bg-transparent hover:border-primary/40 peer-checked:border-primary peer-checked:bg-primary/5 transition-all">
+<div class="flex-shrink-0 w-10 h-10 rounded-lg bg-slate-100 dark:bg-primary/10 flex items-center justify-center text-lg font-bold text-slate-600 dark:text-primary peer-checked:bg-primary peer-checked:text-white">C</div>
+<div class="flex flex-col">
+<span class="text-lg font-bold">14</span>
+<span class="text-sm text-slate-500 dark:text-slate-400">Incorrect application of the limits</span>
+</div>
+</div>
+</label>
+<label class="group relative cursor-pointer">
+<input class="peer sr-only" name="quiz_option" type="radio"/>
+<div class="h-full flex items-center gap-4 p-5 rounded-xl border-2 border-slate-200 dark:border-primary/10 bg-transparent hover:border-primary/40 peer-checked:border-primary peer-checked:bg-primary/5 transition-all">
+<div class="flex-shrink-0 w-10 h-10 rounded-lg bg-slate-100 dark:bg-primary/10 flex items-center justify-center text-lg font-bold text-slate-600 dark:text-primary peer-checked:bg-primary peer-checked:text-white">D</div>
+<div class="flex flex-col">
+<span class="text-lg font-bold">8</span>
+<span class="text-sm text-slate-500 dark:text-slate-400">Common error in the antiderivative calculation</span>
+</div>
+</div>
+</label>
+</div>
+<!-- Footer Actions -->
+<div class="flex items-center justify-between pt-8 border-t border-primary/10">
+<button class="flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5 transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+                Previous
+            </button>
+<div class="flex items-center gap-4">
+<button class="hidden md:flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-primary hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined">bookmark</span>
+                    Review Later
+                </button>
+<button class="flex items-center gap-2 px-10 py-3 rounded-xl font-bold bg-primary text-white shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all">
+                    Next Question
+                    <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+</main>
+<footer class="w-full py-8 mt-auto px-4 text-center border-t border-primary/5">
+<p class="text-sm text-slate-500">
+<span class="font-bold text-slate-700 dark:text-slate-300">QuickTest for Paul University</span> • Awka, Nigeria
+        </p>
+<p class="text-[10px] mt-2 text-slate-400 uppercase tracking-widest">
+            Made by Gbengaayo Olawale
+        </p>
+</footer>
+</body></html>

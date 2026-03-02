@@ -1,0 +1,296 @@
+<html class="dark"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#f97415",
+            "background-light": "#f8f7f5",
+            "background-dark": "#23170f",
+          },
+          fontFamily: {
+            "display": ["Lexend", "sans-serif"]
+          },
+          borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/20 px-6 lg:px-20 py-4 bg-background-dark/50 backdrop-blur-md sticky top-0 z-50">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-3 text-primary">
+<div class="size-8 bg-primary/10 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined">functions</span>
+</div>
+<h2 class="text-slate-100 text-lg font-bold leading-tight tracking-tight hidden md:block">Admin Control - Paul University QuickTest</h2>
+<h2 class="text-slate-100 text-lg font-bold leading-tight tracking-tight md:hidden">QuickTest</h2>
+</div>
+<div class="hidden lg:flex items-center">
+<label class="flex flex-col min-w-40 h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-xl h-full bg-primary/5 border border-primary/20">
+<div class="text-primary/60 flex items-center justify-center pl-4">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 border-none bg-transparent focus:ring-0 text-slate-100 placeholder:text-primary/40 text-sm" placeholder="Search questions..."/>
+</div>
+</label>
+</div>
+</div>
+<div class="flex items-center gap-4 lg:gap-8">
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-slate-300 hover:text-primary text-sm font-medium transition-colors" href="#">Dashboard</a>
+<a class="text-slate-300 hover:text-primary text-sm font-medium transition-colors" href="#">Courses</a>
+<a class="text-primary text-sm font-medium border-b-2 border-primary pb-1" href="#">Imports</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center rounded-xl h-10 px-4 bg-primary text-white text-sm font-bold hover:bg-primary/90 transition-all">
+<span>Profile</span>
+</button>
+<div class="bg-primary/20 rounded-full size-10 flex items-center justify-center border border-primary/30" data-alt="User profile avatar placeholder">
+<span class="material-symbols-outlined text-primary">person</span>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 px-6 lg:px-20 py-8 max-w-7xl mx-auto w-full">
+<div class="flex flex-col gap-2 mb-8">
+<div class="flex items-center gap-2 text-primary/60 text-sm font-medium">
+<a href="#">Dashboard</a>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-slate-400">Import Math Questions</span>
+</div>
+<h1 class="text-slate-100 text-4xl font-extrabold tracking-tight">Import Math Questions</h1>
+<p class="text-slate-400 text-base max-w-2xl">Streamline your examination process for Paul University students. Upload bulk JSON files or manually input LaTeX-formatted mathematical problems.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<div class="lg:col-span-8 flex flex-col gap-8">
+<section class="bg-primary/5 rounded-2xl border-2 border-dashed border-primary/30 p-10 flex flex-col items-center justify-center text-center group hover:border-primary/60 transition-all cursor-pointer">
+<div class="size-16 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-4xl">cloud_upload</span>
+</div>
+<h3 class="text-slate-100 text-xl font-bold mb-2">Upload JSON Question File</h3>
+<p class="text-slate-400 text-sm max-w-md mb-6">Drag and drop your structured JSON file here. Ensure all math formulas are in standard LaTeX format for proper rendering.</p>
+<button class="bg-primary/20 hover:bg-primary/30 text-primary border border-primary/40 px-6 py-2.5 rounded-xl font-bold text-sm transition-colors">
+                Browse Files
+              </button>
+</section>
+<section class="bg-background-dark/40 border border-primary/10 rounded-2xl p-6 shadow-xl backdrop-blur-sm">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary">edit_note</span>
+<h3 class="text-slate-100 text-xl font-bold">Manual Entry</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-slate-300">Course</label>
+<select class="bg-primary/5 border border-primary/20 rounded-xl text-slate-100 focus:ring-primary focus:border-primary px-4 py-2.5">
+<option>MAT 101 - Algebra</option>
+<option>MAT 202 - Calculus</option>
+<option>CSC 201 - Discrete Math</option>
+</select>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-slate-300">Topic</label>
+<input class="bg-primary/5 border border-primary/20 rounded-xl text-slate-100 focus:ring-primary focus:border-primary px-4 py-2.5 placeholder:text-primary/30" placeholder="e.g. Quadratic Equations" type="text"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-slate-300">Difficulty</label>
+<select class="bg-primary/5 border border-primary/20 rounded-xl text-slate-100 focus:ring-primary focus:border-primary px-4 py-2.5">
+<option>Beginner</option>
+<option>Intermediate</option>
+<option>Advanced</option>
+</select>
+</div>
+</div>
+<div class="flex flex-col gap-2 mb-6">
+<label class="text-sm font-semibold text-slate-300">Question Body (LaTeX Supported)</label>
+<textarea class="bg-primary/5 border border-primary/20 rounded-xl text-slate-100 focus:ring-primary focus:border-primary px-4 py-2.5 placeholder:text-primary/30" placeholder="Solve for x: $x^2 + 5x + 6 = 0$" rows="4"></textarea>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-slate-300">Option A (Correct)</label>
+<input class="bg-primary/10 border-2 border-primary/40 rounded-xl text-slate-100 focus:ring-primary focus:border-primary px-4 py-2.5" placeholder="$-2, -3$" type="text"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-slate-300">Option B</label>
+<input class="bg-primary/5 border border-primary/20 rounded-xl text-slate-100 focus:ring-primary focus:border-primary px-4 py-2.5" placeholder="$2, 3$" type="text"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-slate-300">Option C</label>
+<input class="bg-primary/5 border border-primary/20 rounded-xl text-slate-100 focus:ring-primary focus:border-primary px-4 py-2.5" placeholder="$-5, -6$" type="text"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-semibold text-slate-300">Option D</label>
+<input class="bg-primary/5 border border-primary/20 rounded-xl text-slate-100 focus:ring-primary focus:border-primary px-4 py-2.5" placeholder="$1, 6$" type="text"/>
+</div>
+</div>
+<div class="flex justify-end gap-4">
+<button class="px-6 py-2.5 rounded-xl border border-primary/20 text-slate-300 font-bold hover:bg-primary/5 transition-colors">Clear</button>
+<button class="px-8 py-2.5 rounded-xl bg-primary text-white font-bold hover:bg-primary/90 shadow-lg shadow-primary/20 transition-all">Import Question</button>
+</div>
+</section>
+</div>
+<div class="lg:col-span-4 flex flex-col gap-8">
+<section class="bg-background-dark/40 border border-primary/10 rounded-2xl overflow-hidden sticky top-24 shadow-xl backdrop-blur-sm">
+<div class="bg-primary/10 border-b border-primary/10 p-4 flex items-center justify-between">
+<span class="text-primary font-bold text-sm uppercase tracking-wider flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">visibility</span> Student View Preview
+                </span>
+<span class="bg-green-500/20 text-green-500 text-[10px] px-2 py-0.5 rounded-full font-bold uppercase">Live</span>
+</div>
+<div class="p-6">
+<div class="mb-4">
+<span class="text-slate-400 text-xs font-bold uppercase">Question 1</span>
+<p class="text-slate-100 text-lg mt-2 leading-relaxed">
+                    Solve for x if the quadratic equation is given as:
+                    </p><div class="my-4 p-4 bg-primary/5 rounded-lg text-center font-serif italic text-xl text-primary">
+                      x<sup>2</sup> + 5x + 6 = 0
+                    </div>
+<p></p>
+</div>
+<div class="space-y-3">
+<div class="flex items-center gap-3 p-3 rounded-xl border border-primary/10 bg-primary/5">
+<div class="size-6 rounded-full border border-primary/40 flex items-center justify-center text-xs font-bold text-primary">A</div>
+<span class="text-slate-200">-2, -3</span>
+</div>
+<div class="flex items-center gap-3 p-3 rounded-xl border border-primary/10 hover:bg-primary/5 transition-colors cursor-pointer">
+<div class="size-6 rounded-full border border-slate-600 flex items-center justify-center text-xs font-bold text-slate-400">B</div>
+<span class="text-slate-400">2, 3</span>
+</div>
+<div class="flex items-center gap-3 p-3 rounded-xl border border-primary/10 hover:bg-primary/5 transition-colors cursor-pointer">
+<div class="size-6 rounded-full border border-slate-600 flex items-center justify-center text-xs font-bold text-slate-400">C</div>
+<span class="text-slate-400">-5, -6</span>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-primary/10">
+<p class="text-xs text-slate-500 italic text-center">Note: This is exactly how the question will appear to Paul University students during the live CBT.</p>
+</div>
+</div>
+</section>
+</div>
+</div>
+<section class="mt-12 bg-background-dark/40 border border-primary/10 rounded-2xl overflow-hidden shadow-xl">
+<div class="p-6 border-b border-primary/10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+<h3 class="text-slate-100 text-xl font-bold">Recently Imported</h3>
+<div class="flex gap-2">
+<button class="bg-primary/10 text-primary p-2 rounded-lg hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+<button class="bg-primary/10 text-primary p-2 rounded-lg hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-primary/5 border-b border-primary/10 text-primary/70 text-xs font-bold uppercase tracking-wider">
+<th class="px-6 py-4">Course</th>
+<th class="px-6 py-4">Question Fragment</th>
+<th class="px-6 py-4">Difficulty</th>
+<th class="px-6 py-4">Added</th>
+<th class="px-6 py-4 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-primary/5">
+<tr class="hover:bg-primary/5 transition-colors">
+<td class="px-6 py-4">
+<span class="text-slate-200 font-medium block">MAT 101</span>
+<span class="text-slate-500 text-xs">Algebra</span>
+</td>
+<td class="px-6 py-4 text-slate-300">Solve $ \int \sin(x) dx $...</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-yellow-500/10 text-yellow-500 text-[10px] font-bold">Intermediate</span>
+</td>
+<td class="px-6 py-4 text-slate-400 text-sm">2 mins ago</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="text-slate-400 hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-primary/5 transition-colors">
+<td class="px-6 py-4">
+<span class="text-slate-200 font-medium block">MAT 202</span>
+<span class="text-slate-500 text-xs">Calculus II</span>
+</td>
+<td class="px-6 py-4 text-slate-300">Find the limit of $\frac{1}{x}$...</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-green-500/10 text-green-500 text-[10px] font-bold">Beginner</span>
+</td>
+<td class="px-6 py-4 text-slate-400 text-sm">1 hour ago</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="text-slate-400 hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-primary/5 transition-colors">
+<td class="px-6 py-4">
+<span class="text-slate-200 font-medium block">CSC 201</span>
+<span class="text-slate-500 text-xs">Discrete Math</span>
+</td>
+<td class="px-6 py-4 text-slate-300">If $A \subset B$, then $A \cap B$ is...</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded bg-red-500/10 text-red-500 text-[10px] font-bold">Advanced</span>
+</td>
+<td class="px-6 py-4 text-slate-400 text-sm">Yesterday</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+</button>
+<button class="text-slate-400 hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 bg-primary/5 border-t border-primary/10 flex items-center justify-between text-xs text-slate-500">
+<span>Showing 3 of 152 questions</span>
+<div class="flex gap-2">
+<button class="p-1 hover:text-primary"><span class="material-symbols-outlined text-sm">chevron_left</span></button>
+<button class="p-1 hover:text-primary"><span class="material-symbols-outlined text-sm">chevron_right</span></button>
+</div>
+</div>
+</section>
+</main>
+<footer class="mt-auto px-6 lg:px-20 py-8 border-t border-primary/10 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500 text-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm">school</span>
+<span>© 2024 Paul University Awka. All rights reserved.</span>
+</div>
+<div class="flex items-center gap-4">
+<a class="hover:text-primary transition-colors" href="#">Support</a>
+<a class="hover:text-primary transition-colors" href="#">API Docs</a>
+<div class="h-4 w-[1px] bg-primary/20"></div>
+<span class="font-bold text-primary/80">Made by Gbengaayo Olawale</span>
+</div>
+</footer>
+</div>
+</div>
+
+```</body></html>

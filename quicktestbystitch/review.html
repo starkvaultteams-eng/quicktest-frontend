@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>QuickTest Results &amp; Math Review</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f97415",
+                        "background-light": "#f8f7f5",
+                        "background-dark": "#23170f",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+        .math-font {
+            font-family: "Times New Roman", Times, serif;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/20 px-6 md:px-10 py-3 bg-background-dark/50 backdrop-blur-md sticky top-0 z-50">
+<div class="flex items-center gap-4 text-primary">
+<div class="size-8 flex items-center justify-center bg-primary rounded-lg text-background-dark">
+<span class="material-symbols-outlined font-bold">functions</span>
+</div>
+<h2 class="text-slate-100 text-xl font-bold leading-tight tracking-tight">QuickTest</h2>
+</div>
+<div class="hidden md:flex flex-1 justify-end gap-8">
+<nav class="flex items-center gap-9">
+<a class="text-slate-300 hover:text-primary text-sm font-medium transition-colors" href="#">Dashboard</a>
+<a class="text-slate-300 hover:text-primary text-sm font-medium transition-colors" href="#">Courses</a>
+<a class="text-slate-300 hover:text-primary text-sm font-medium transition-colors" href="#">Quizzes</a>
+<a class="text-slate-300 hover:text-primary text-sm font-medium transition-colors" href="#">Reports</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="flex cursor-pointer items-center justify-center rounded-full size-10 bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 transition-all">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary" data-alt="Student profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAuJ6cNqnmBbuR21xx_21e8WOdxKN1bok_RI1yHjt_zC6knYpo2F7ENXUerSXxafVzlpcloJby3S917Sv2WlB4k2uhGonJ4RDGfeKrd6isN_egZaFpOUCUtZUFCGd3ugcHvyOg4UF-1PKjo6TDNGxWB5z4NFyJJXhpGqztSZf3-laEBQwgHYSqjoLE5oep1EWcJ7Ea6T63i1jpklLI09Rs3kP5AchI2tOary4yI04LatcEj0P-9NY_aKomYhvf6Vqn1GE2ei9RGkYwE");'></div>
+</div>
+</div>
+<button class="md:hidden text-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</header>
+<main class="flex flex-1 justify-center py-8 px-4 md:px-0">
+<div class="layout-content-container flex flex-col max-w-[960px] flex-1 gap-8">
+<!-- Header Title -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-sm">school</span>
+<p class="text-sm font-semibold tracking-wider uppercase">Paul University - Awka</p>
+</div>
+<h1 class="text-slate-100 text-4xl font-black leading-tight tracking-tight">Quiz Results: Math Review</h1>
+<p class="text-slate-400 text-base">Advanced Calculus &amp; Integration Theory (MAT 301)</p>
+</div>
+<!-- Score Card Section -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="md:col-span-2 bg-primary/5 border border-primary/20 rounded-xl p-8 flex flex-col md:flex-row items-center gap-8">
+<!-- Circular Progress -->
+<div class="relative size-32 md:size-40">
+<svg class="size-full" viewbox="0 0 36 36">
+<path class="stroke-primary/10 fill-none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" stroke-width="3"></path>
+<path class="stroke-primary fill-none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" stroke-dasharray="80, 100" stroke-linecap="round" stroke-width="3"></path>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-4xl font-black text-slate-100 leading-none">80%</span>
+<span class="text-xs font-bold text-primary uppercase mt-1">Passed</span>
+</div>
+</div>
+<div class="flex-1 flex flex-col gap-4 text-center md:text-left">
+<div>
+<h3 class="text-2xl font-bold text-slate-100">Excellent performance!</h3>
+<p class="text-slate-400 mt-1">You scored 8 out of 10 points. You are in the top 15% of your class.</p>
+</div>
+<div class="flex flex-wrap gap-4 justify-center md:justify-start">
+<div class="bg-background-dark/40 px-4 py-2 rounded-lg border border-primary/10">
+<p class="text-xs text-slate-500 uppercase font-bold tracking-widest">Time Spent</p>
+<p class="text-lg font-bold text-slate-100">12:45</p>
+</div>
+<div class="bg-background-dark/40 px-4 py-2 rounded-lg border border-primary/10">
+<p class="text-xs text-slate-500 uppercase font-bold tracking-widest">Average Speed</p>
+<p class="text-lg font-bold text-slate-100">1.2m/q</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Sidebar -->
+<div class="flex flex-col gap-3">
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 px-6 rounded-xl flex items-center justify-center gap-3 transition-all shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined">refresh</span>
+                                Retry Quiz
+                            </button>
+<button class="w-full bg-primary/10 hover:bg-primary/20 text-primary font-bold py-4 px-6 rounded-xl border border-primary/30 flex items-center justify-center gap-3 transition-all">
+<span class="material-symbols-outlined">dashboard</span>
+                                Back to Dashboard
+                            </button>
+<button class="w-full flex items-center justify-center gap-2 text-slate-400 hover:text-slate-200 py-2 text-sm font-medium transition-colors">
+<span class="material-symbols-outlined text-sm">share</span>
+                                Share Results
+                            </button>
+</div>
+</div>
+<!-- Question Review Section -->
+<div class="flex flex-col gap-6">
+<div class="flex items-center justify-between border-b border-primary/10 pb-4">
+<h2 class="text-slate-100 text-2xl font-bold leading-tight tracking-tight flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">checklist</span>
+                                Question Review
+                            </h2>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-green-500/10 text-green-500 rounded-full text-xs font-bold border border-green-500/20">8 Correct</span>
+<span class="px-3 py-1 bg-red-500/10 text-red-500 rounded-full text-xs font-bold border border-red-500/20">2 Incorrect</span>
+</div>
+</div>
+<!-- Question Cards -->
+<div class="space-y-6">
+<!-- Correct Question -->
+<div class="flex flex-col bg-primary/5 border border-primary/10 rounded-xl overflow-hidden shadow-sm">
+<div class="flex items-center justify-between px-6 py-4 border-b border-primary/5 bg-background-dark/20">
+<div class="flex items-center gap-3">
+<span class="size-8 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-sm border border-primary/30">1</span>
+<span class="text-sm font-bold text-slate-300">CALCULUS I</span>
+</div>
+<div class="flex items-center gap-2 text-green-500 font-bold text-sm">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+                                        Correct
+                                    </div>
+</div>
+<div class="p-6 space-y-4">
+<p class="text-slate-100 text-lg font-medium">Solve the following indefinite integral:</p>
+<div class="bg-background-dark/60 p-6 rounded-lg border border-primary/5 text-center shadow-inner">
+<p class="math-font text-2xl text-slate-100 leading-loose tracking-wide">
+                                            \int 2x \, dx = ?
+                                        </p>
+</div>
+<div class="grid md:grid-cols-2 gap-4">
+<div class="space-y-2">
+<p class="text-xs uppercase font-black text-slate-500 tracking-widest">Your Answer</p>
+<div class="p-3 bg-green-500/10 border border-green-500/20 rounded-lg text-green-500 font-bold math-font text-lg">
+                                                x^2 + C
+                                            </div>
+</div>
+<div class="space-y-2">
+<p class="text-xs uppercase font-black text-slate-500 tracking-widest">Correct Solution</p>
+<div class="p-3 bg-primary/10 border border-primary/20 rounded-lg text-primary font-bold math-font text-lg">
+                                                x^2 + C
+                                            </div>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-primary/5">
+<p class="text-xs uppercase font-black text-slate-500 tracking-widest mb-2">Explanation</p>
+<p class="text-slate-400 text-sm leading-relaxed">
+                                            Using the power rule of integration, where <span class="math-font">\int x^n \, dx = \frac{x^{n+1}}{n+1} + C</span>. 
+                                            For <span class="math-font">n=1</span>, the integral becomes <span class="math-font">2 \cdot \frac{x^2}{2} + C = x^2 + C</span>.
+                                        </p>
+</div>
+</div>
+</div>
+<!-- Incorrect Question -->
+<div class="flex flex-col bg-red-500/5 border border-red-500/10 rounded-xl overflow-hidden shadow-sm">
+<div class="flex items-center justify-between px-6 py-4 border-b border-red-500/5 bg-background-dark/20">
+<div class="flex items-center gap-3">
+<span class="size-8 rounded-full bg-red-500/20 text-red-400 flex items-center justify-center font-bold text-sm border border-red-500/30">2</span>
+<span class="text-sm font-bold text-slate-300">GEOMETRY</span>
+</div>
+<div class="flex items-center gap-2 text-red-500 font-bold text-sm">
+<span class="material-symbols-outlined text-[18px]">cancel</span>
+                                        Incorrect
+                                    </div>
+</div>
+<div class="p-6 space-y-4">
+<p class="text-slate-100 text-lg font-medium">Calculate the volume of a sphere with radius <span class="math-font">r</span>:</p>
+<div class="bg-background-dark/60 p-6 rounded-lg border border-red-500/5 text-center shadow-inner">
+<p class="math-font text-2xl text-slate-100 leading-loose tracking-wide">
+                                            V = \frac{4}{3} \pi r^3
+                                        </p>
+</div>
+<div class="grid md:grid-cols-2 gap-4">
+<div class="space-y-2">
+<p class="text-xs uppercase font-black text-slate-500 tracking-widest">Your Answer</p>
+<div class="p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-red-500 font-bold math-font text-lg line-through opacity-70">
+                                                \pi r^2
+                                            </div>
+</div>
+<div class="space-y-2">
+<p class="text-xs uppercase font-black text-slate-500 tracking-widest">Correct Solution</p>
+<div class="p-3 bg-primary/10 border border-primary/20 rounded-lg text-primary font-bold math-font text-lg">
+                                                \frac{4}{3} \pi r^3
+                                            </div>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-red-500/5">
+<p class="text-xs uppercase font-black text-slate-500 tracking-widest mb-2">Explanation</p>
+<p class="text-slate-400 text-sm leading-relaxed">
+                                            The formula <span class="math-font">\pi r^2</span> represents the area of a circle. The volume of a sphere is derived through spherical integration as <span class="math-font">V = \int_{0}^{\pi} \int_{0}^{2\pi} \int_{0}^{r} \rho^2 \sin \phi \, d\rho \, d\theta \, d\phi</span>.
+                                        </p>
+</div>
+</div>
+</div>
+<!-- Third Question (More Complex LaTeX) -->
+<div class="flex flex-col bg-primary/5 border border-primary/10 rounded-xl overflow-hidden shadow-sm">
+<div class="flex items-center justify-between px-6 py-4 border-b border-primary/5 bg-background-dark/20">
+<div class="flex items-center gap-3">
+<span class="size-8 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold text-sm border border-primary/30">3</span>
+<span class="text-sm font-bold text-slate-300">TRIGONOMETRY</span>
+</div>
+<div class="flex items-center gap-2 text-green-500 font-bold text-sm">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+                                        Correct
+                                    </div>
+</div>
+<div class="p-6 space-y-4">
+<p class="text-slate-100 text-lg font-medium">Evaluate the following trigonometric limit:</p>
+<div class="bg-background-dark/60 p-6 rounded-lg border border-primary/5 text-center shadow-inner">
+<p class="math-font text-2xl text-slate-100 leading-loose tracking-wide">
+                                            \lim_{x \to 0} \frac{\sin x}{x} = ?
+                                        </p>
+</div>
+<div class="grid md:grid-cols-2 gap-4">
+<div class="space-y-2">
+<p class="text-xs uppercase font-black text-slate-500 tracking-widest">Your Answer</p>
+<div class="p-3 bg-green-500/10 border border-green-500/20 rounded-lg text-green-500 font-bold math-font text-lg">
+                                                1
+                                            </div>
+</div>
+<div class="space-y-2">
+<p class="text-xs uppercase font-black text-slate-500 tracking-widest">Correct Solution</p>
+<div class="p-3 bg-primary/10 border border-primary/20 rounded-lg text-primary font-bold math-font text-lg">
+                                                1
+                                            </div>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-primary/5">
+<p class="text-xs uppercase font-black text-slate-500 tracking-widest mb-2">Explanation</p>
+<p class="text-slate-400 text-sm leading-relaxed">
+                                            Using L'Hôpital's Rule or the Squeeze Theorem, we find that as <span class="math-font">x</span> approaches 0, the ratio of the arc length to its sine approaches equality.
+                                        </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Branding -->
+<footer class="mt-12 mb-8 flex flex-col items-center justify-center gap-4 text-slate-500 border-t border-primary/10 pt-8">
+<div class="flex items-center gap-2 text-primary/60">
+<span class="material-symbols-outlined text-lg">verified_user</span>
+<p class="text-xs font-bold tracking-widest uppercase">Verified Educational Content</p>
+</div>
+<p class="text-sm">Made with ❤️ for Paul University students by <span class="text-primary font-semibold">Gbengaayo Olawale</span></p>
+<div class="flex gap-6 mt-2">
+<a class="hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">help_center</span></a>
+<a class="hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">feedback</span></a>
+<a class="hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">policy</span></a>
+</div>
+</footer>
+</div>
+</main>
+</div>
+</div>
+</body></html>

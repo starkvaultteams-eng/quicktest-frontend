@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Paul University QuickTest Registration</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f97415",
+                        "background-light": "#f8f7f5",
+                        "background-dark": "#030712",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+        .orange-glow {
+            box-shadow: 0 0 20px -5px rgba(249, 116, 21, 0.3);
+        }
+        .blue-glow {
+            box-shadow: 0 0 20px -5px rgba(59, 130, 246, 0.3);
+        }
+        .ambient-bg {
+            background: radial-gradient(circle at 20% 20%, rgba(249, 116, 21, 0.15) 0%, transparent 40%),
+                        radial-gradient(circle at 80% 80%, rgba(59, 130, 246, 0.15) 0%, transparent 40%);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen ambient-bg selection:bg-primary/30">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-white/5 px-6 md:px-10 py-4 backdrop-blur-md bg-white/5 sticky top-0 z-50">
+<div class="flex items-center gap-3">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-2xl">school</span>
+</div>
+<h2 class="text-slate-100 text-xl font-extrabold leading-tight tracking-tight">Quick<span class="text-primary">Test</span></h2>
+</div>
+<div class="hidden md:flex flex-1 justify-end gap-8 items-center">
+<nav class="flex items-center gap-9">
+<a class="text-slate-300 hover:text-primary transition-colors text-sm font-medium" href="#">Home</a>
+<a class="text-slate-300 hover:text-primary transition-colors text-sm font-medium" href="#">Exams</a>
+<a class="text-slate-300 hover:text-primary transition-colors text-sm font-medium" href="#">Resources</a>
+</nav>
+<button class="flex min-w-[100px] cursor-pointer items-center justify-center rounded-xl h-10 px-5 bg-primary/10 border border-primary/20 text-primary hover:bg-primary hover:text-white transition-all duration-300 text-sm font-bold">
+                    Login
+                </button>
+</div>
+<div class="md:hidden">
+<span class="material-symbols-outlined text-slate-100">menu</span>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col items-center justify-center p-4 md:p-8">
+<div class="w-full max-w-[520px] bg-white/5 backdrop-blur-2xl border border-white/10 rounded-xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
+<!-- Top Accent Gradient -->
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-50"></div>
+<div class="text-center mb-10">
+<h1 class="text-slate-100 tracking-tight text-3xl md:text-4xl font-black leading-tight mb-2">
+                        Join the <span class="text-primary">Paulite</span> Community
+                    </h1>
+<p class="text-slate-400 text-sm font-medium uppercase tracking-widest">Paul University, Awka</p>
+</div>
+<form class="space-y-6">
+<div class="flex flex-col gap-2">
+<label class="text-slate-300 text-sm font-semibold px-1">Student Username</label>
+<div class="group relative flex w-full items-stretch">
+<input class="form-input flex w-full min-w-0 flex-1 rounded-xl text-slate-100 focus:outline-none focus:ring-0 border-2 border-white/5 bg-white/5 focus:border-primary transition-all duration-300 h-14 placeholder:text-slate-500 pl-12 pr-4 text-base font-normal leading-normal" placeholder="e.g. PU-2023-123" type="text"/>
+<div class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined">person</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-slate-300 text-sm font-semibold px-1">Password</label>
+<div class="group relative flex w-full items-stretch">
+<input class="form-input flex w-full min-w-0 flex-1 rounded-xl text-slate-100 focus:outline-none focus:ring-0 border-2 border-white/5 bg-white/5 focus:border-primary transition-all duration-300 h-14 placeholder:text-slate-500 pl-12 pr-12 text-base font-normal leading-normal" placeholder="Create a secure password" type="password"/>
+<div class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined">lock</span>
+</div>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300" type="button">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</div>
+</div>
+<div class="pt-4">
+<button class="w-full flex cursor-pointer items-center justify-center overflow-hidden rounded-xl h-14 px-6 bg-primary text-white text-lg font-extrabold transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] orange-glow" type="submit">
+                            Create Account
+                        </button>
+</div>
+</form>
+<div class="mt-8 text-center">
+<p class="text-slate-400 text-sm font-medium">
+                        Already have an account? 
+                        <a class="text-primary hover:underline ml-1 font-bold" href="#">Login</a>
+</p>
+</div>
+</div>
+<!-- Branding Footer -->
+<footer class="mt-12 text-center pb-8">
+<p class="text-slate-500 text-xs font-semibold tracking-widest uppercase">
+                    Made by <span class="text-slate-300">Gbengaayo Olawale</span>
+</p>
+<div class="flex justify-center gap-6 mt-6 opacity-30 grayscale contrast-125">
+<div class="h-8 w-24 bg-slate-400 rounded-md"></div>
+<div class="h-8 w-24 bg-slate-400 rounded-md"></div>
+</div>
+</footer>
+</main>
+</div>
+<!-- Background Decor -->
+<div class="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none opacity-40">
+<div class="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/20 rounded-full blur-[120px]"></div>
+<div class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-blue-500/10 rounded-full blur-[120px]"></div>
+</div>
+</body></html>
