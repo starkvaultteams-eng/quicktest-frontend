@@ -75,7 +75,7 @@ export default function Quiz() {
         const score = typeof serverScore === 'number' ? serverScore : calculated;
         const timeSpent = Date.now() - startTimeRef.current;
         const avgSpeed = timeSpent > 0 ? (questions.length / (timeSpent / 1000)) : 0; // q/sec
-        navigate('/results', { state: { questions, answers, courseTitlesMap, courseTitlesMap: undefined, score, timeSpent, avgSpeed, detailedAnswers } });
+        navigate('/results', { state: { questions, answers, courseTitlesMap, score, timeSpent, avgSpeed, detailedAnswers } });
       } catch (e) {
         console.error(e);
       } finally {

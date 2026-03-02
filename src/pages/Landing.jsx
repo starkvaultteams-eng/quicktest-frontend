@@ -21,23 +21,23 @@ export default function Landing() {
             </div>
             
             <h1 className="text-slate-900 dark:text-slate-100 text-5xl md:text-7xl font-[900] leading-[1.1] tracking-tighter mb-6">
-              Ace Your Exams, <span className="text-primary">Paulites.</span>
+              Ace Your <span className="text-primary">Exams.</span>
             </h1>
             
             <p className="text-slate-600 dark:text-slate-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
               Specifically built for Paul University students, Awka. Practice with your course notes and actual past questions in a real exam environment.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/register">
-                <button className="flex items-center justify-center gap-2 px-8 py-4 bg-primary text-white rounded-xl font-bold text-lg hover:scale-105 transition-transform">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center w-full sm:w-auto">
+              <Link to="/register" className="w-full sm:w-auto">
+                <button className="w-full flex items-center justify-center gap-2 px-8 py-4 bg-primary text-white rounded-xl font-bold text-lg hover:scale-105 transition-transform">
                   <MdRocketLaunch />
                   Start Practicing Now
                 </button>
               </Link>
               
               {/* link scrolls down to features section */}
-              <a href="#features" className="flex items-center justify-center gap-2 px-8 py-4 bg-slate-800 dark:bg-slate-700 text-white rounded-xl font-bold text-lg border border-slate-700 dark:border-slate-600 hover:bg-slate-700 dark:hover:bg-slate-600 transition-all">
+              <a href="#features" className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 bg-slate-800 dark:bg-slate-700 text-white rounded-xl font-bold text-lg border border-slate-700 dark:border-slate-600 hover:bg-slate-700 dark:hover:bg-slate-600 transition-all">
                 <MdInfo />
                 Learn More
               </a>

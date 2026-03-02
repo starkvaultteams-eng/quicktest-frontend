@@ -73,7 +73,7 @@ export default function Header() {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden p-2"
+          className="md:hidden p-2 text-slate-100 dark:text-slate-100"
         >
           {mobileMenuOpen ? <MdClose /> : <MdMenu />}
         </button>
@@ -84,19 +84,19 @@ export default function Header() {
         <div className="absolute top-full left-0 right-0 bg-white dark:bg-slate-900 border-b border-primary/10 p-4 md:hidden flex flex-col gap-3">
           {isAuth ? (
             <>
-              <Link to="/dashboard" className="px-3 py-2 hover:bg-primary/10 rounded-lg">Dashboard</Link>
-              <Link to="/quiz" className="px-3 py-2 hover:bg-primary/10 rounded-lg">Quiz</Link>
-              <Link to="/upload" className="px-3 py-2 hover:bg-primary/10 rounded-lg">Upload</Link>
+              <Link to="/dashboard" className="px-3 py-2 text-slate-900 dark:text-slate-100 hover:bg-primary/10 rounded-lg">Dashboard</Link>
+              <Link to="/quiz" className="px-3 py-2 text-slate-900 dark:text-slate-100 hover:bg-primary/10 rounded-lg">Quiz</Link>
+              <Link to="/upload" className="px-3 py-2 text-slate-900 dark:text-slate-100 hover:bg-primary/10 rounded-lg">Upload</Link>
               {user?.isAdmin && (
-                <Link to="/admin" className="px-3 py-2 hover:bg-primary/10 rounded-lg">Admin</Link>
+                <Link to="/admin" className="px-3 py-2 text-slate-900 dark:text-slate-100 hover:bg-primary/10 rounded-lg">Admin</Link>
               )}
-              <button onClick={handleLogout} className="px-3 py-2 text-left hover:bg-primary/10 rounded-lg text-red-500">
+              <button onClick={handleLogout} className="px-3 py-2 text-left text-red-500 hover:bg-primary/10 rounded-lg">
                 Logout
               </button>
             </>
           ) : (
             <>
-              <Link to="/login" className="px-3 py-2 hover:bg-primary/10 rounded-lg">Login</Link>
+              <Link to="/login" className="px-3 py-2 text-slate-900 dark:text-slate-100 hover:bg-primary/10 rounded-lg">Login</Link>
               <Link to="/register" className="px-3 py-2 bg-primary text-white rounded-lg">Sign Up</Link>
             </>
           )}
