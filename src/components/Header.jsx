@@ -20,7 +20,7 @@ export default function Header() {
         <div className="size-10 flex items-center justify-center rounded-lg bg-primary/10">
           <MdSchool className="text-3xl" />
         </div>
-        <div className="flex flex-col hidden sm:block">
+        <div className="flex flex-col">
           <h2 className="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em]">QuickTest</h2>
         </div>
       </Link>
