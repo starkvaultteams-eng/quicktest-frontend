@@ -108,38 +108,37 @@ export default function Admin() {
   };
 
   // accept the original item as well, so we can flag it if the link is bad
-  const handleDownload = async (item, href) => {
-    const id = item._id || item.id;
-    if (!href || href === '#') {
-      alert('Download link unavailable');
-      // mark missing so admin can see
-      if (id) {
-        setPdfs((prev) =>
-          prev.map((p) => {
-            const key = p._id || p.id;
-            return key === id ? { ...p, status: 'missing' } : p;
-          })
-        );
-      }
-      return;
+const handleDownload = (item, href) => {
+  const id = item._id || item.id;
+  if (!href || href === '#') {
+    alert('Download link unavailable');
+    if (id) {
+      setPdfs((prev) =>
+        prev.map((p) => {
+          const key = p._id || p.id;
+          return key === id ? { ...p, status: 'missing' } : p;
+        })
+      );
     }
-    try {
-      const res = await fetch(href, { method: 'HEAD' });
-      if (!res.ok) throw new Error('not ok');
-      window.open(href, '_blank');
-    } catch (e) {
-      console.error('download check failed', e);
-      if (id) {
-        setPdfs((prev) =>
-          prev.map((p) => {
-            const key = p._id || p.id;
-            return key === id ? { ...p, status: 'missing' } : p;
-          })
-        );
-      }
-      alert('File not available (404). Confirm the backend is serving the correct path.');
+    return;
+  }
+
+  try {
+    window.open(href, '_blank', 'noopener,noreferrer');
+  } catch (e) {
+    console.error('download open failed', e);
+    if (id) {
+      setPdfs((prev) =>
+        prev.map((p) => {
+          const key = p._id || p.id;
+          return key === id ? { ...p, status: 'missing' } : p;
+        })
+      );
     }
-  };
+    alert('Could not open file. Please try again.');
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-background-light dark:bg-background-dark flex flex-col overflow-x-hidden text-slate-900 dark:text-slate-100">
