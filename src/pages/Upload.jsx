@@ -42,18 +42,18 @@ export default function Upload() {
           </h1>
           {loadError && <p className="text-red-500 mb-4">{loadError}</p>}
           <p className="mb-6 text-slate-600 dark:text-slate-400">
-            Please upload any helpful PDF resources (notes, past questions, etc.).
-            Submissions are not automatically processed – the instructor will
+            Please upload any helpful resources (PDFs or images).
+            Submissions are not automatically processed - the instructor will
             review them manually and incorporate them into the question bank.
           </p>
 
           <div className="glass-card rounded-3xl p-6 border-2 border-primary/20">
-            <label className="block mb-2 font-medium">Upload a PDF</label>
+            <label className="block mb-2 font-medium">Upload a file (PDF/Image)</label>
             <label className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg cursor-pointer hover:bg-primary/90 transition-colors">
               <MdUpload /> Choose File
               <input
                 type="file"
-                accept="application/pdf"
+                accept="application/pdf,image/*"
                 onChange={async (e) => {
                   const f = e.target.files[0];
                   if (!f) return;
