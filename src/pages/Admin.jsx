@@ -18,18 +18,16 @@ export default function Admin() {
         adminAPI.getStats(),
         adminAPI.getUploadedPDFs(),
       ]);
-      // normalize stats shape: some backends wrap under `stats`
       const rawStats = statsRes.data;
       console.log('raw stats payload', rawStats);
       const normalizedStats = rawStats?.stats || rawStats || {};
-      // map backend props to UI keys
       const statsForUi = {
         users: normalizedStats.users ?? normalizedStats.totalUsers ?? 0,
         quizzes: normalizedStats.quizzes ?? normalizedStats.totalAttempts ?? 0,
         pdfs: normalizedStats.pdfs ?? normalizedStats.totalUploads ?? 0,
       };
       setStats(statsForUi);
-      // normalize uploads response to an array
+
       const raw = pdfRes.data;
       let list = [];
       if (Array.isArray(raw)) list = raw;
@@ -37,7 +35,6 @@ export default function Admin() {
       else if (raw && typeof raw === 'object' && Object.keys(raw).length === 0) list = [];
       else if (raw && typeof raw === 'object' && raw.files && Array.isArray(raw.files)) list = raw.files;
       else if (raw && typeof raw === 'object') {
-        // try to extract array-like values
         const maybe = raw.pdfs || raw.files || raw.items || null;
         if (Array.isArray(maybe)) list = maybe;
         else list = [];
@@ -54,7 +51,6 @@ export default function Admin() {
     refreshData();
   }, []);
 
-  // derive API base (strip trailing /api if present) for fallback download links
   const apiBase = (() => {
     try {
       const base = api.defaults?.baseURL || '';
@@ -64,6 +60,18 @@ export default function Admin() {
     }
   })();
 
+  const buildDownloadHref = (item) => {
+    if (!item || typeof item !== 'object') return '#';
+
+    if (item.fileUrl) return item.fileUrl;
+    if (item.url && /^https?:\/\//i.test(item.url)) return item.url;
+
+    const key = item.cloudinaryPublicId || item.filename || item._id || item.id;
+    if (!key) return '#';
+
+    return `${apiBase}/uploads/${encodeURIComponent(String(key))}`;
+  };
+
   const handlePDFUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -72,9 +80,7 @@ export default function Admin() {
     setError('');
     try {
       await adminAPI.uploadPDF(file);
-      // refresh list after upload
       const pdfRes = await adminAPI.getUploadedPDFs();
-      // normalize like refreshData
       const raw = pdfRes.data;
       let list = [];
       if (Array.isArray(raw)) list = raw;
@@ -99,7 +105,6 @@ export default function Admin() {
     if (!confirm('Delete this upload? This cannot be undone.')) return;
     try {
       await adminAPI.deleteUploadedPDF(id);
-      // optimistic remove
       setPdfs((prev) => prev.filter((p) => (p._id || p.id) !== id));
     } catch (e) {
       console.error('delete failed', e);
@@ -107,38 +112,36 @@ export default function Admin() {
     }
   };
 
-  // accept the original item as well, so we can flag it if the link is bad
-const handleDownload = (item, href) => {
-  const id = item._id || item.id;
-  if (!href || href === '#') {
-    alert('Download link unavailable');
-    if (id) {
-      setPdfs((prev) =>
-        prev.map((p) => {
-          const key = p._id || p.id;
-          return key === id ? { ...p, status: 'missing' } : p;
-        })
-      );
+  const handleDownload = (item, href) => {
+    const id = item._id || item.id;
+    if (!href || href === '#') {
+      alert('Download link unavailable');
+      if (id) {
+        setPdfs((prev) =>
+          prev.map((p) => {
+            const key = p._id || p.id;
+            return key === id ? { ...p, status: 'missing' } : p;
+          })
+        );
+      }
+      return;
     }
-    return;
-  }
 
-  try {
-    window.open(href, '_blank', 'noopener,noreferrer');
-  } catch (e) {
-    console.error('download open failed', e);
-    if (id) {
-      setPdfs((prev) =>
-        prev.map((p) => {
-          const key = p._id || p.id;
-          return key === id ? { ...p, status: 'missing' } : p;
-        })
-      );
+    try {
+      window.open(href, '_blank', 'noopener,noreferrer');
+    } catch (e) {
+      console.error('download open failed', e);
+      if (id) {
+        setPdfs((prev) =>
+          prev.map((p) => {
+            const key = p._id || p.id;
+            return key === id ? { ...p, status: 'missing' } : p;
+          })
+        );
+      }
+      alert('Could not open file. Please try again.');
     }
-    alert('Could not open file. Please try again.');
-  }
-};
-
+  };
 
   return (
     <div className="min-h-screen bg-background-light dark:bg-background-dark flex flex-col overflow-x-hidden text-slate-900 dark:text-slate-100">
@@ -172,7 +175,6 @@ const handleDownload = (item, href) => {
             </div>
           ) : (
             <>
-              {/* Stats Section */}
               {stats && Object.keys(stats).length === 0 && (
                 <p className="text-sm text-red-500 mb-4">
                   Warning: `/admin/stats` returned empty object. Ensure the
@@ -212,7 +214,6 @@ const handleDownload = (item, href) => {
                 </div>
               </section>
 
-              {/* PDF upload */}
               <section className="space-y-4">
                 <h2 className="text-2xl font-bold">Course Materials (PDFs)</h2>
                 <label className="flex items-center gap-2 cursor-pointer">
@@ -220,7 +221,7 @@ const handleDownload = (item, href) => {
                   <span className="text-primary underline">Choose PDF</span>
                   <input
                     type="file"
-                    accept="application/pdf"
+                    accept="application/pdf,image/*"
                     onChange={handlePDFUpload}
                     disabled={uploading}
                     className="hidden"
@@ -230,11 +231,11 @@ const handleDownload = (item, href) => {
                 {uploading && <p>Uploading...</p>}
               </section>
 
-              {/* List of PDFs */}
               <section className="space-y-2">
                 <h2 className="text-2xl font-bold">Uploaded Files</h2>
-                <p className="text-xs text-slate-500">If downloads return 404, ensure your backend serves the
-                /uploads/<code>filename</code> path or configure external storage.</p>
+                <p className="text-xs text-slate-500">
+                  If downloads fail, ensure link is built from <code>cloudinaryPublicId</code>, <code>filename</code>, or <code>_id</code>.
+                </p>
                 {pdfs.length === 0 && <p className="text-sm">No PDFs uploaded</p>}
                 <div className="w-full">
                   <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 text-sm font-medium px-3 py-2 border-b border-slate-200/10">
@@ -244,7 +245,7 @@ const handleDownload = (item, href) => {
                     <div className="col-span-1 sm:col-span-2 text-right">Actions</div>
                   </div>
                   <div className="divide-y divide-slate-200/5">
-                      {Array.isArray(pdfs) ? pdfs.map((p, idx) => {
+                    {Array.isArray(pdfs) ? pdfs.map((p, idx) => {
                       let href = '#';
                       let label = '';
                       let uploadedAt = '';
@@ -253,7 +254,7 @@ const handleDownload = (item, href) => {
                         label = p;
                       } else if (p && typeof p === 'object') {
                         label = p.originalname || p.name || p.filename || (p._id ? String(p._id) : JSON.stringify(p));
-                        href = p.url || p.path || (p.filename ? `${apiBase}/uploads/${p.filename}` : '#');
+                        href = buildDownloadHref(p);
                         uploadedAt = p.createdAt || p.uploadedAt || '';
                         if (!p.originalname && !p.name && !p.filename && !p._id) console.warn('Admin: unexpected upload item shape', p);
                       } else {
@@ -272,21 +273,21 @@ const handleDownload = (item, href) => {
                             )}
                           </div>
                           <div className="col-span-12 sm:col-span-2 flex justify-end gap-2">
-                                <button onClick={() => handleDownload(p, href)} className="px-3 py-1 bg-slate-100 dark:bg-slate-800/50 rounded-md text-primary hover:underline">
-                                  Download
-                                </button>
+                            <button onClick={() => handleDownload(p, href)} className="px-3 py-1 bg-slate-100 dark:bg-slate-800/50 rounded-md text-primary hover:underline">
+                              Download
+                            </button>
                             <button onClick={() => handleDelete(p)} className="px-3 py-1 bg-red-500 text-white rounded-md">Delete</button>
                           </div>
                         </div>
-                        );
-                      }) : (
-                        <div className="p-4 text-sm text-red-500">Unexpected upload data format</div>
-                      )}
-                    </div>
+                      );
+                    }) : (
+                      <div className="p-4 text-sm text-red-500">Unexpected upload data format</div>
+                    )}
+                  </div>
                 </div>
-            </section>
-              </>
-            )}
+              </section>
+            </>
+          )}
         </div>
       </main>
     </div>
