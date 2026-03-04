@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useState } from 'react';
 import { MdSchool, MdMenu, MdClose } from 'react-icons/md';
@@ -6,7 +6,22 @@ import { MdSchool, MdMenu, MdClose } from 'react-icons/md';
 export default function Header() {
   const { isAuth, logout, user } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const navClass = (active) =>
+    `text-sm font-medium transition-colors ${
+      active ? 'text-primary' : 'hover:text-primary'
+    }`;
+
+  const mobileNavClass = (active) =>
+    `px-3 py-2 rounded-lg transition-colors ${
+      active
+        ? 'bg-primary/10 text-primary'
+        : 'text-slate-900 dark:text-slate-100 hover:bg-primary/10'
+    }`;
+
+  const isQuizFlowRoute = location.pathname === '/quiz' || location.pathname === '/results';
 
   const handleLogout = () => {
     logout();
@@ -28,12 +43,12 @@ export default function Header() {
       {/* Center Navigation */}
       {isAuth && (
         <div className="hidden md:flex flex-1 justify-center gap-8 px-8">
-          <Link to="/dashboard" className="text-sm font-medium hover:text-primary transition-colors">Dashboard</Link>
-          <Link to="/quiz" className="text-sm font-medium hover:text-primary transition-colors">Quiz</Link>
-          <Link to="/leaderboard" className="text-sm font-medium hover:text-primary transition-colors">Leaderboard</Link>
-          <Link to="/upload" className="text-sm font-medium hover:text-primary transition-colors">Upload</Link>
+          <Link to="/dashboard" className={navClass(location.pathname === '/dashboard')}>Dashboard</Link>
+          <Link to="/dashboard" className={navClass(isQuizFlowRoute)}>Quiz</Link>
+          <Link to="/leaderboard" className={navClass(location.pathname === '/leaderboard')}>Leaderboard</Link>
+          <Link to="/upload" className={navClass(location.pathname === '/upload')}>Upload</Link>
           {user?.isAdmin && (
-            <Link to="/admin" className="text-sm font-medium hover:text-primary transition-colors">Admin</Link>
+            <Link to="/admin" className={navClass(location.pathname === '/admin')}>Admin</Link>
           )}
         </div>
       )}
@@ -84,11 +99,11 @@ export default function Header() {
         <div className="absolute top-full left-0 right-0 bg-white dark:bg-slate-900 border-b border-primary/10 p-4 md:hidden flex flex-col gap-3">
           {isAuth ? (
             <>
-              <Link to="/dashboard" className="px-3 py-2 text-slate-900 dark:text-slate-100 hover:bg-primary/10 rounded-lg">Dashboard</Link>
-              <Link to="/quiz" className="px-3 py-2 text-slate-900 dark:text-slate-100 hover:bg-primary/10 rounded-lg">Quiz</Link>
-              <Link to="/upload" className="px-3 py-2 text-slate-900 dark:text-slate-100 hover:bg-primary/10 rounded-lg">Upload</Link>
+              <Link to="/dashboard" className={mobileNavClass(location.pathname === '/dashboard')}>Dashboard</Link>
+              <Link to="/dashboard" className={mobileNavClass(isQuizFlowRoute)}>Quiz</Link>
+              <Link to="/upload" className={mobileNavClass(location.pathname === '/upload')}>Upload</Link>
               {user?.isAdmin && (
-                <Link to="/admin" className="px-3 py-2 text-slate-900 dark:text-slate-100 hover:bg-primary/10 rounded-lg">Admin</Link>
+                <Link to="/admin" className={mobileNavClass(location.pathname === '/admin')}>Admin</Link>
               )}
               <button onClick={handleLogout} className="px-3 py-2 text-left text-red-500 hover:bg-primary/10 rounded-lg">
                 Logout
