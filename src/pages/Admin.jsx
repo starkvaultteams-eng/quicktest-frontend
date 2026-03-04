@@ -63,13 +63,15 @@ export default function Admin() {
   const buildDownloadHref = (item) => {
     if (!item || typeof item !== 'object') return '#';
 
+    const key = item.cloudinaryPublicId || item.filename || item._id || item.id;
+    if (key) {
+      return `${apiBase}/uploads/${encodeURIComponent(String(key))}`;
+    }
+
     if (item.fileUrl) return item.fileUrl;
     if (item.url && /^https?:\/\//i.test(item.url)) return item.url;
 
-    const key = item.cloudinaryPublicId || item.filename || item._id || item.id;
-    if (!key) return '#';
-
-    return `${apiBase}/uploads/${encodeURIComponent(String(key))}`;
+    return '#';
   };
 
   const handlePDFUpload = async (e) => {
