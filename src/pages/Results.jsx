@@ -23,12 +23,14 @@ export default function Results() {
 
   // helper for normalization when we have to fall back
   const normalize = (v) => (v === undefined || v === null ? '' : String(v).trim().toUpperCase());
+  const toId = (v) => (v === undefined || v === null ? '' : String(v));
 
   // convert detailedAnswers list into a map keyed by questionId for quick lookup
   const detailMap = {};
   detailedAnswers.forEach((d) => {
-    if (d && d.questionId !== undefined && d.questionId !== null) {
-      detailMap[d.questionId] = d;
+    const qid = toId(d?.questionId);
+    if (qid) {
+      detailMap[qid] = d;
     }
   });
 
@@ -130,13 +132,21 @@ export default function Results() {
             </div>
 
             {questions.map((q, idx) => {
-              const detail = detailMap[q._id] || {};
-              const userAns = detail.selectedOption !== undefined ? detail.selectedOption : answers[idx];
+              const qid = toId(q?._id);
+              const detail = detailMap[qid] || {};
+              const rawUserAns =
+                detail.selectedOption !== undefined && detail.selectedOption !== null
+                  ? detail.selectedOption
+                  : answers?.[idx];
               const correct = detail.correctOption || q.correct_option || q.correct || '';
+              const userAnsNormalized = normalize(rawUserAns);
+              const hasAnswer = userAnsNormalized !== '';
+              const fallbackIsCorrect = hasAnswer && userAnsNormalized === normalize(correct);
               const isCorrect =
                 typeof detail.isCorrect === 'boolean'
-                  ? detail.isCorrect
-                  : normalize(userAns) === normalize(correct);
+                  ? hasAnswer && detail.isCorrect
+                  : fallbackIsCorrect;
+              const userAns = hasAnswer ? rawUserAns : 'Not answered';
 
               return (
                 <div
