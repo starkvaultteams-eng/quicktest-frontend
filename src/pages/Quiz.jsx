@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Header from '../components/Header';
+import PageLoader from '../components/PageLoader';
 import { quizAPI } from '../services/api';
 import Latex from '../components/Latex';
 import { MdInfo, MdArrowBack, MdBookmark, MdArrowForward, MdDone } from 'react-icons/md';
@@ -85,7 +86,7 @@ export default function Quiz() {
   };
 
   if (loading) {
-    return <div className="flex items-center justify-center h-screen">Loading...</div>;
+    return <PageLoader label="Preparing your quiz..." />;
   }
 
   if (questions.length === 0) {

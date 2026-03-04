@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
+import PageLoader from '../components/PageLoader';
 import { quizAPI } from '../services/api';
 import { formatCourseLabel } from '../utils/course';
 
@@ -21,15 +22,17 @@ export default function History() {
       .finally(() => setLoading(false));
   }, [navigate]);
 
+  if (loading) {
+    return <PageLoader label="Loading your quiz history..." />;
+  }
+
   return (
     <div className="min-h-screen bg-background-light dark:bg-background-dark flex flex-col overflow-x-hidden text-slate-900 dark:text-slate-100">
       <Header />
       <main className="flex-1 p-6 lg:px-20">
         <div className="max-w-[800px] mx-auto">
           <h1 className="text-3xl font-bold mb-6">Your Quiz History</h1>
-          {loading ? (
-            <p>Loading...</p>
-          ) : attempts.length === 0 ? (
+          {attempts.length === 0 ? (
             <p>You haven't taken any quizzes yet.</p>
           ) : (
             <ul className="space-y-4">
