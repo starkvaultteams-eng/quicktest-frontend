@@ -44,7 +44,7 @@ export default function Header() {
       {isAuth && (
         <div className="hidden md:flex flex-1 justify-center gap-8 px-8">
           <Link to="/dashboard" className={navClass(location.pathname === '/dashboard')}>Dashboard</Link>
-          <Link to="/dashboard" className={navClass(isQuizFlowRoute)}>Quiz</Link>
+          <Link to="/quiz" className={navClass(isQuizFlowRoute)}>Quiz</Link>
           <Link to="/leaderboard" className={navClass(location.pathname === '/leaderboard')}>Leaderboard</Link>
           <Link to="/upload" className={navClass(location.pathname === '/upload')}>Upload</Link>
           {user?.isAdmin && (
@@ -100,7 +100,7 @@ export default function Header() {
           {isAuth ? (
             <>
               <Link to="/dashboard" className={mobileNavClass(location.pathname === '/dashboard')}>Dashboard</Link>
-              <Link to="/dashboard" className={mobileNavClass(isQuizFlowRoute)}>Quiz</Link>
+              <Link to="/quiz" className={mobileNavClass(isQuizFlowRoute)}>Quiz</Link>
               <Link to="/upload" className={mobileNavClass(location.pathname === '/upload')}>Upload</Link>
               {user?.isAdmin && (
                 <Link to="/admin" className={mobileNavClass(location.pathname === '/admin')}>Admin</Link>

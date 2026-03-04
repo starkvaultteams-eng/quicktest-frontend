@@ -21,7 +21,7 @@ export default function Quiz() {
 
   useEffect(() => {
     if (!params) {
-      navigate('/dashboard');
+      setLoading(false);
       return;
     }
 
@@ -101,6 +101,28 @@ export default function Quiz() {
 
   if (loading) {
     return <PageLoader label="Preparing your quiz..." />;
+  }
+
+  if (!params) {
+    return (
+      <div className="min-h-screen bg-background-light dark:bg-background-dark flex flex-col overflow-x-hidden text-slate-900 dark:text-slate-100">
+        <Header />
+        <main className="flex-1 p-6 lg:px-20 flex items-center justify-center">
+          <div className="max-w-[720px] w-full glass-card rounded-3xl p-8 border-2 border-primary/20 text-center">
+            <h1 className="text-3xl font-bold mb-3">Quiz Center</h1>
+            <p className="text-slate-600 dark:text-slate-400 mb-6">
+              Choose your course and settings before starting a quiz.
+            </p>
+            <button
+              onClick={() => navigate('/dashboard')}
+              className="px-6 py-3 bg-primary text-white rounded-xl font-bold hover:bg-primary/90 transition-all"
+            >
+              Go to Quiz Setup
+            </button>
+          </div>
+        </main>
+      </div>
+    );
   }
 
   if (questions.length === 0) {
