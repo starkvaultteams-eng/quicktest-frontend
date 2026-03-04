@@ -6,6 +6,8 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 import Dashboard from './pages/Dashboard';
 import Quiz from './pages/Quiz';
 import Results from './pages/Results';
@@ -39,6 +41,8 @@ function AppRoutes() {
       <Route path="/" element={isAuth ? <Navigate to="/dashboard" /> : <Landing />} />
       <Route path="/login" element={isAuth ? <Navigate to="/dashboard" /> : <Login />} />
       <Route path="/register" element={isAuth ? <Navigate to="/dashboard" /> : <Register />} />
+      <Route path="/forgot-password" element={isAuth ? <Navigate to="/dashboard" /> : <ForgotPassword />} />
+      <Route path="/reset-password" element={isAuth ? <Navigate to="/dashboard" /> : <ResetPassword />} />
       
       <Route path="/dashboard" element={
         <PrivateRoute>
