@@ -25,6 +25,17 @@ export default function Quiz() {
       return;
     }
 
+    // Retry flow from results: reuse exact same question set instead of refetching random ones.
+    if (Array.isArray(params.questions) && params.questions.length > 0) {
+      setQuestions(params.questions);
+      setCourseTitlesMap(params.courseTitlesMap || {});
+      setAnswers({});
+      setCurrent(0);
+      startTimeRef.current = Date.now();
+      setLoading(false);
+      return;
+    }
+
     const { course, topic, difficulty, count } = params;
     console.log('fetching quiz', { course, topic, difficulty, count });
     quizAPI
@@ -35,6 +46,9 @@ export default function Quiz() {
         // injected something later via state (unlikely).  We're just providing a
         // placeholder in case we want to reuse title map between pages.
         setCourseTitlesMap({});
+        setAnswers({});
+        setCurrent(0);
+        startTimeRef.current = Date.now();
       })
       .catch((err) => console.error(err))
       .finally(() => setLoading(false));
