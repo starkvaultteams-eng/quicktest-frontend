@@ -70,7 +70,7 @@ export const quizAPI = {
   },
   getMetadata: () => api.get('/metadata'),
   submitAnswers: (answers) => api.post('/submit', { answers }),
-  getMyAttempts: () => api.get('/my-attempts'),
+  getMyAttempts: (params = {}) => api.get('/my-attempts', { params }),
   getLeaderboard: () => api.get('/leaderboard'),
   uploadPDF: (file) => uploadWithRetry('/upload-pdf', file, 1),
   getMyUploads: () => api.get('/my-uploads'),
@@ -79,6 +79,7 @@ export const quizAPI = {
 export const adminAPI = {
   importQuestions: () => api.post('/import'),
   getStats: () => api.get('/admin/stats'),
+  getAttempts: (params = {}) => api.get('/admin/attempts', { params }),
   getUploadedPDFs: () => api.get('/admin/uploads'),
   uploadPDF: (file) => uploadWithRetry('/upload-pdf', file, 1),
   updateUploadedPDFStatus: (id, status) => api.patch(`/admin/uploads/${id}`, { status }),

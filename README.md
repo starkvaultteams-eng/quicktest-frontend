@@ -8,6 +8,10 @@
   - refreshes admin stats after sync
 - Dashboard metadata now fetches fresh data even when cache exists, so newly imported courses (for example `CHM 101`, `CHM 107`) show up without waiting for cache expiry.
 - Added helper text under `# Questions`: "You can change the number of questions (1-50)."
+- History page now supports paginated backend responses from `/api/my-attempts`
+  and includes Previous/Next controls.
+- Admin uploads table actions were reworked for desktop so status/action buttons
+  no longer collide.
 **React + Vite** single‑page application that serves as the user interface for the
 QuickTest student quiz practice platform.  The frontend talks to a Node/Express
 backend (included elsewhere in the repo) via a simple JSON API.

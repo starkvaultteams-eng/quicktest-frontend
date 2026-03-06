@@ -282,10 +282,10 @@ export default function Admin() {
                 {pdfs.length === 0 && <p className="text-sm">No PDFs uploaded</p>}
                 <div className="w-full">
                   <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 text-sm font-medium px-3 py-2 border-b border-slate-200/10">
-                    <div className="col-span-1 sm:col-span-5">Filename</div>
+                    <div className="col-span-1 sm:col-span-4">Filename</div>
                     <div className="col-span-1 sm:col-span-2">Uploaded</div>
                     <div className="col-span-1 sm:col-span-2">Status</div>
-                    <div className="col-span-1 sm:col-span-3 text-right">Actions</div>
+                    <div className="col-span-1 sm:col-span-4 text-right">Actions</div>
                   </div>
                   <div className="divide-y divide-slate-200/5">
                     {Array.isArray(pdfs) ? pdfs.map((p, idx) => {
@@ -306,7 +306,7 @@ export default function Admin() {
 
                       return (
                         <div key={idx} className="grid grid-cols-12 gap-4 items-center px-3 py-3">
-                          <div className="col-span-6 sm:col-span-5 truncate">{label}</div>
+                          <div className="col-span-6 sm:col-span-4 truncate">{label}</div>
                           <div className="col-span-12 sm:col-span-2 text-slate-500 text-sm">{uploadedAt ? new Date(uploadedAt).toLocaleString() : '—'}</div>
                           <div className="col-span-12 sm:col-span-2 text-sm">
                             {status === 'missing' ? (
@@ -323,7 +323,7 @@ export default function Admin() {
                               </span>
                             )}
                           </div>
-                          <div className="col-span-12 sm:col-span-3 flex flex-col sm:flex-row sm:justify-end gap-2">
+                          <div className="col-span-12 sm:col-span-4 flex flex-col sm:flex-row sm:flex-nowrap sm:justify-end gap-2">
                             {status !== 'approved' && (
                               <button
                                 onClick={() => handleApprove(p)}
