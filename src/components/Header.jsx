@@ -101,6 +101,7 @@ export default function Header() {
             <>
               <Link to="/dashboard" className={mobileNavClass(location.pathname === '/dashboard')}>Dashboard</Link>
               <Link to="/quiz" className={mobileNavClass(isQuizFlowRoute)}>Quiz</Link>
+              <Link to="/leaderboard" className={mobileNavClass(location.pathname === '/leaderboard')}>Leaderboard</Link>
               <Link to="/upload" className={mobileNavClass(location.pathname === '/upload')}>Upload</Link>
               {user?.isAdmin && (
                 <Link to="/admin" className={mobileNavClass(location.pathname === '/admin')}>Admin</Link>
