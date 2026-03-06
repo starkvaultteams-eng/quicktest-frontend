@@ -46,6 +46,7 @@ export default function Dashboard() {
   const fetchMetadata = async () => {
     setLoadingMeta(true);
     setMetaError('');
+    let hydratedFromCache = false;
 
     // try cache first (also handle old cache shape which stored questions)
     try {
@@ -56,8 +57,7 @@ export default function Dashboard() {
         if (age < 15 * 60 * 1000) {
           if (cached.courses && cached.topics) {
             processMetadata(cached);
-            setLoadingMeta(false);
-            return;
+            hydratedFromCache = true;
           }
           if (cached.questions) {
             // migrate from older format
@@ -73,13 +73,16 @@ export default function Dashboard() {
             } catch (e) {
               console.warn('failed to write migrated cache', e);
             }
-            setLoadingMeta(false);
-            return;
+            hydratedFromCache = true;
           }
         }
       }
     } catch (e) {
       console.warn('failed to read cache', e);
+    }
+
+    if (hydratedFromCache) {
+      setLoadingMeta(false);
     }
 
     try {
@@ -244,6 +247,9 @@ export default function Dashboard() {
                       onChange={(e) => setCount(Number(e.target.value))}
                       className="w-full bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 focus:ring-primary focus:border-primary"
                     />
+                    <p className="text-xs text-slate-500">
+                      You can change the number of questions (1-50).
+                    </p>
                   </div>
                 </div>
 
