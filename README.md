@@ -12,6 +12,10 @@
   and includes Previous/Next controls.
 - Admin uploads table actions were reworked for desktop so status/action buttons
   no longer collide.
+- History page now includes:
+  - per-page stats cards (attempt count, average %, best %)
+  - course/topic filters
+  - cleaner labels without dangling `-` when topic is missing
 **React + Vite** single‑page application that serves as the user interface for the
 QuickTest student quiz practice platform.  The frontend talks to a Node/Express
 backend (included elsewhere in the repo) via a simple JSON API.
