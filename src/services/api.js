@@ -77,7 +77,7 @@ export const quizAPI = {
 };
 
 export const adminAPI = {
-  importQuestions: (questions) => api.post('/import', { questions }),
+  importQuestions: () => api.post('/import'),
   getStats: () => api.get('/admin/stats'),
   getUploadedPDFs: () => api.get('/admin/uploads'),
   uploadPDF: (file) => uploadWithRetry('/upload-pdf', file, 1),

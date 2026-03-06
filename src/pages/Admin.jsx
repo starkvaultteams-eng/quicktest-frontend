@@ -10,6 +10,7 @@ export default function Admin() {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState('');
   const [loadingData, setLoadingData] = useState(true);
+  const [syncingQuestions, setSyncingQuestions] = useState(false);
 
   const refreshData = async () => {
     setLoadingData(true);
@@ -131,6 +132,23 @@ export default function Admin() {
     }
   };
 
+  const handleSyncQuestions = async () => {
+    setSyncingQuestions(true);
+    try {
+      const res = await adminAPI.importQuestions();
+      const inserted = res?.data?.inserted ?? 0;
+      const skipped = res?.data?.skipped ?? 0;
+      localStorage.removeItem('metadataCache');
+      await refreshData();
+      alert(`Question bank synced. Inserted: ${inserted}, Skipped: ${skipped}`);
+    } catch (e) {
+      console.error('question sync failed', e);
+      alert('Question sync failed');
+    } finally {
+      setSyncingQuestions(false);
+    }
+  };
+
   const handleDownload = (item, href) => {
     const id = item._id || item.id;
     if (!href || href === '#') {
@@ -175,6 +193,13 @@ export default function Admin() {
                 className="px-3 py-1 bg-primary text-white rounded-md text-sm hover:bg-primary/90 transition"
               >
                 Refresh
+              </button>
+              <button
+                onClick={handleSyncQuestions}
+                disabled={syncingQuestions}
+                className="px-3 py-1 bg-emerald-600 text-white rounded-md text-sm hover:bg-emerald-700 transition disabled:opacity-50"
+              >
+                {syncingQuestions ? 'Syncing...' : 'Sync Questions'}
               </button>
               <button
                 onClick={() => {
