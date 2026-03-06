@@ -20,7 +20,6 @@ export default function Admin() {
         adminAPI.getUploadedPDFs(),
       ]);
       const rawStats = statsRes.data;
-      console.log('raw stats payload', rawStats);
       const normalizedStats = rawStats?.stats || rawStats || {};
       const statsForUi = {
         users: normalizedStats.users ?? normalizedStats.totalUsers ?? 0,
@@ -283,10 +282,10 @@ export default function Admin() {
                 {pdfs.length === 0 && <p className="text-sm">No PDFs uploaded</p>}
                 <div className="w-full">
                   <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 text-sm font-medium px-3 py-2 border-b border-slate-200/10">
-                    <div className="col-span-1 sm:col-span-6">Filename</div>
+                    <div className="col-span-1 sm:col-span-5">Filename</div>
                     <div className="col-span-1 sm:col-span-2">Uploaded</div>
                     <div className="col-span-1 sm:col-span-2">Status</div>
-                    <div className="col-span-1 sm:col-span-2 text-right">Actions</div>
+                    <div className="col-span-1 sm:col-span-3 text-right">Actions</div>
                   </div>
                   <div className="divide-y divide-slate-200/5">
                     {Array.isArray(pdfs) ? pdfs.map((p, idx) => {
@@ -307,32 +306,36 @@ export default function Admin() {
 
                       return (
                         <div key={idx} className="grid grid-cols-12 gap-4 items-center px-3 py-3">
-                          <div className="col-span-6 sm:col-span-6 truncate">{label}</div>
+                          <div className="col-span-6 sm:col-span-5 truncate">{label}</div>
                           <div className="col-span-12 sm:col-span-2 text-slate-500 text-sm">{uploadedAt ? new Date(uploadedAt).toLocaleString() : '—'}</div>
                           <div className="col-span-12 sm:col-span-2 text-sm">
                             {status === 'missing' ? (
-                              <span className="text-red-500 font-bold">missing</span>
+                              <span className="inline-flex px-2 py-1 rounded-full text-xs font-bold bg-red-100 text-red-700 dark:bg-red-500/20 dark:text-red-300">
+                                missing
+                              </span>
                             ) : status === 'approved' ? (
                               <span className="inline-flex px-2 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-300">
                                 approved
                               </span>
                             ) : (
-                              status || 'available'
+                              <span className="inline-flex px-2 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300">
+                                {status || 'pending'}
+                              </span>
                             )}
                           </div>
-                          <div className="col-span-12 sm:col-span-2 flex flex-wrap justify-start sm:justify-end gap-2">
+                          <div className="col-span-12 sm:col-span-3 flex flex-col sm:flex-row sm:justify-end gap-2">
                             {status !== 'approved' && (
                               <button
                                 onClick={() => handleApprove(p)}
-                                className="px-3 py-1 bg-emerald-600 text-white rounded-md"
+                                className="px-3 py-1 bg-emerald-600 text-white rounded-md text-xs font-semibold min-w-[84px]"
                               >
                                 Approve
                               </button>
                             )}
-                            <button onClick={() => handleDownload(p, href)} className="px-3 py-1 bg-slate-100 dark:bg-slate-800/50 rounded-md text-primary hover:underline">
+                            <button onClick={() => handleDownload(p, href)} className="px-3 py-1 bg-slate-100 dark:bg-slate-800/50 rounded-md text-primary text-xs font-semibold hover:underline min-w-[84px]">
                               Download
                             </button>
-                            <button onClick={() => handleDelete(p)} className="px-3 py-1 bg-red-500 text-white rounded-md">Delete</button>
+                            <button onClick={() => handleDelete(p)} className="px-3 py-1 bg-red-500 text-white rounded-md text-xs font-semibold min-w-[84px]">Delete</button>
                           </div>
                         </div>
                       );

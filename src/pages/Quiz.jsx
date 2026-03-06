@@ -37,7 +37,6 @@ export default function Quiz() {
     }
 
     const { course, topic, difficulty, count } = params;
-    console.log('fetching quiz', { course, topic, difficulty, count });
     quizAPI
       .getQuestions(course, topic, difficulty, count)
       .then((res) => {

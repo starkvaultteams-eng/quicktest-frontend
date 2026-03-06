@@ -30,7 +30,6 @@ export default function Dashboard() {
     e.preventDefault();
     const safeTopic = topic === 'All Topics' ? undefined : topic;
     const safeDifficulty = difficulty === 'All Levels' ? undefined : difficulty;
-    console.log('starting quiz with', { course, topic: safeTopic, difficulty: safeDifficulty, count });
     navigate('/quiz', {
       state: { course, topic: safeTopic, difficulty: safeDifficulty, count },
     });
