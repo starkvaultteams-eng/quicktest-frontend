@@ -1,5 +1,13 @@
 **#Quicktest-frontend**
 
+## Latest updates (2026-03-06)
+
+- Added Admin **Sync Questions** button:
+  - calls `/api/import`
+  - clears local `metadataCache`
+  - refreshes admin stats after sync
+- Dashboard metadata now fetches fresh data even when cache exists, so newly imported courses (for example `CHM 101`, `CHM 107`) show up without waiting for cache expiry.
+- Added helper text under `# Questions`: "You can change the number of questions (1-50)."
 **React + Vite** single‑page application that serves as the user interface for the
 QuickTest student quiz practice platform.  The frontend talks to a Node/Express
 backend (included elsewhere in the repo) via a simple JSON API.
@@ -396,3 +404,4 @@ Contribution and testing notes
 The README will be updated progressively after every change or user correction
 as requested, so it now contains an up‑to‑date snapshot of understanding and
 features implemented.
+
