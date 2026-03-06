@@ -12,7 +12,7 @@ import Dashboard from './pages/Dashboard';
 import Quiz from './pages/Quiz';
 import Results from './pages/Results';
 import Admin from './pages/Admin';
-// History page deprecated and link removed
+import History from './pages/History';
 import Leaderboard from './pages/Leaderboard';
 import Upload from './pages/Upload';
 import NotFound from './pages/NotFound';
@@ -59,6 +59,12 @@ function AppRoutes() {
       <Route path="/results" element={
         <PrivateRoute>
           <Results />
+        </PrivateRoute>
+      } />
+
+      <Route path="/history" element={
+        <PrivateRoute>
+          <History />
         </PrivateRoute>
       } />
       

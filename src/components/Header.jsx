@@ -45,6 +45,7 @@ export default function Header() {
         <div className="hidden md:flex flex-1 justify-center gap-8 px-8">
           <Link to="/dashboard" className={navClass(location.pathname === '/dashboard')}>Dashboard</Link>
           <Link to="/quiz" className={navClass(isQuizFlowRoute)}>Quiz</Link>
+          <Link to="/history" className={navClass(location.pathname === '/history')}>History</Link>
           <Link to="/leaderboard" className={navClass(location.pathname === '/leaderboard')}>Leaderboard</Link>
           <Link to="/upload" className={navClass(location.pathname === '/upload')}>Upload</Link>
           {user?.isAdmin && (
@@ -101,6 +102,7 @@ export default function Header() {
             <>
               <Link to="/dashboard" className={mobileNavClass(location.pathname === '/dashboard')}>Dashboard</Link>
               <Link to="/quiz" className={mobileNavClass(isQuizFlowRoute)}>Quiz</Link>
+              <Link to="/history" className={mobileNavClass(location.pathname === '/history')}>History</Link>
               <Link to="/leaderboard" className={mobileNavClass(location.pathname === '/leaderboard')}>Leaderboard</Link>
               <Link to="/upload" className={mobileNavClass(location.pathname === '/upload')}>Upload</Link>
               {user?.isAdmin && (
