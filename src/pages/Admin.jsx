@@ -114,6 +114,23 @@ export default function Admin() {
     }
   };
 
+  const handleApprove = async (item) => {
+    const id = item._id || item.id;
+    if (!id) {
+      alert('Cannot approve: missing id on this file');
+      return;
+    }
+    try {
+      await adminAPI.updateUploadedPDFStatus(id, 'approved');
+      setPdfs((prev) =>
+        prev.map((p) => ((p._id || p.id) === id ? { ...p, status: 'approved' } : p))
+      );
+    } catch (e) {
+      console.error('approve failed', e);
+      alert('Approve failed');
+    }
+  };
+
   const handleDownload = (item, href) => {
     const id = item._id || item.id;
     if (!href || href === '#') {
@@ -275,6 +292,13 @@ export default function Admin() {
                             )}
                           </div>
                           <div className="col-span-12 sm:col-span-2 flex justify-end gap-2">
+                            <button
+                              onClick={() => handleApprove(p)}
+                              disabled={status === 'approved'}
+                              className="px-3 py-1 bg-emerald-600 text-white rounded-md disabled:opacity-50"
+                            >
+                              Approve
+                            </button>
                             <button onClick={() => handleDownload(p, href)} className="px-3 py-1 bg-slate-100 dark:bg-slate-800/50 rounded-md text-primary hover:underline">
                               Download
                             </button>

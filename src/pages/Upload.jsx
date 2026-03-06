@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
-import { quizAPI } from '../services/api';
+import { adminAPI, quizAPI } from '../services/api';
+import { useAuth } from '../context/AuthContext';
 import { MdUpload, MdFileUpload } from 'react-icons/md';
 
 export default function Upload() {
@@ -10,6 +11,7 @@ export default function Upload() {
   const [loadError, setLoadError] = useState('');
 
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   const fetch = async () => {
     try {
@@ -31,6 +33,20 @@ export default function Upload() {
   useEffect(() => {
     fetch();
   }, []);
+
+  const handleApprove = async (item) => {
+    const id = item?._id || item?.id;
+    if (!id) return;
+    try {
+      await adminAPI.updateUploadedPDFStatus(id, 'approved');
+      setMyUploads((prev) =>
+        prev.map((u) => ((u._id || u.id) === id ? { ...u, status: 'approved' } : u))
+      );
+    } catch (e) {
+      console.error('approve failed', e);
+      alert('Approve failed');
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background-light dark:bg-background-dark flex flex-col overflow-x-hidden text-slate-900 dark:text-slate-100">
@@ -85,6 +101,15 @@ export default function Upload() {
                     <MdFileUpload className="text-primary" />
                     <span>{u.originalname || u.filename}</span>
                     <span className="text-sm text-slate-500">- {u.status}</span>
+                    {user?.isAdmin && (
+                      <button
+                        onClick={() => handleApprove(u)}
+                        disabled={u.status === 'approved'}
+                        className="ml-2 px-2 py-1 text-xs rounded bg-emerald-600 text-white disabled:opacity-50"
+                      >
+                        Approve
+                      </button>
+                    )}
                   </li>
                 ))}
               </ul>

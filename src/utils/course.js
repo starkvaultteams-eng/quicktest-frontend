@@ -1,23 +1,41 @@
-export const COURSE_DISPLAY_MAP = {
-  'Information Literacy': 'PUA-GST 121 Information Literacy',
+export const COURSE_CODE_MAP = {
+  Math: 'MTH 101',
+  'Computer Science': 'CSC 101',
+  'CHM 101': 'CHM 101',
+  'CHM 107': 'CHM 107',
+  'Information Literacy': 'GST 121',
+  'PUA-GST 121 Information Literacy': 'GST 121',
 };
 
-export function formatCourseLabel(course, title) {
+function toTitleCaseWords(value) {
+  return String(value || '')
+    .replace(/_/g, ' ')
+    .toLowerCase()
+    .replace(/\b\w/g, (m) => m.toUpperCase())
+    .trim();
+}
+
+export function formatCourseLabel(course) {
   if (!course) return '';
-  // use explicit title if given, otherwise fall back to map or code
-  let base = title || COURSE_DISPLAY_MAP[course] || course;
-  // if we had a separate title (e.g. key was "Mathematics" but course is "Math"),
-  // show both for clarity
-  if (title && title !== course) {
-    base = `${title} (${course})`;
+  return COURSE_CODE_MAP[course] || course;
+}
+
+export function formatCourseFullLabel(course, title) {
+  if (!course) return '';
+
+  const code = formatCourseLabel(course);
+
+  let description = '';
+  if (title) {
+    description = toTitleCaseWords(title)
+      .replace(/^Chm 101 /, '')
+      .replace(/^Chm 107 /, '')
+      .replace(/^Gst 121 /, '')
+      .trim();
+  } else if (course === 'Information Literacy') {
+    description = 'Information Literacy';
   }
-  // mark 100-level courses as Year 1
-  try {
-    if (/^100/.test(String(course))) {
-      return `${base} (100L — Year 1)`;
-    }
-  } catch (e) {
-    // ignore
-  }
-  return base;
+
+  const base = description ? `${code} ${description}` : code;
+  return `${base} (100L)`;
 }

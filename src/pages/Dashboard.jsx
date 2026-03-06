@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { formatCourseLabel } from '../utils/course';
+import { formatCourseFullLabel } from '../utils/course';
 import Header from '../components/Header';
 import { quizAPI } from '../services/api';
 import { useAuth } from '../context/AuthContext';
@@ -10,10 +10,6 @@ import { useAuth } from '../context/AuthContext';
 const COURSE_OUTLINES = {
   // additional notes per course could go here
 };
-const COURSE_DISPLAY_MAP = {
-  'Information Literacy': 'PUA-GST 121 Information Literacy',
-};
-
 export default function Dashboard() {
   const navigate = useNavigate();
   const [course, setCourse] = useState('');
@@ -129,7 +125,7 @@ export default function Dashboard() {
 
     const mappedCourses = courses.map((c) => ({
       value: c,
-      label: formatCourseLabel(c, courseTitles[c]),
+      label: formatCourseFullLabel(c, courseTitles[c]),
     }));
 
     setCourseOptions(mappedCourses);
@@ -299,10 +295,7 @@ export default function Dashboard() {
                     className="glass-card rounded-2xl p-4 border border-primary/20"
                   >
                     <h3 className="font-bold text-lg mb-2">
-                      {courseTitlesMap[c]
-                        ? `${courseTitlesMap[c]} (${c})`
-                        : COURSE_DISPLAY_MAP[c] || c}
-                      <span className="ml-2 text-xs text-slate-400">(100L)</span>
+                      {formatCourseFullLabel(c, courseTitlesMap[c])}
                     </h3>
                     <ul className="list-disc list-inside text-sm ml-4">
                       {(COURSE_OUTLINES[c] || []).map((t) => (

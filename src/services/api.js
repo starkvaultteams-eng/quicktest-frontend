@@ -81,6 +81,7 @@ export const adminAPI = {
   getStats: () => api.get('/admin/stats'),
   getUploadedPDFs: () => api.get('/admin/uploads'),
   uploadPDF: (file) => uploadWithRetry('/upload-pdf', file, 1),
+  updateUploadedPDFStatus: (id, status) => api.patch(`/admin/uploads/${id}`, { status }),
   deleteUploadedPDF: (id) => api.delete(`/admin/uploads/${id}`),
 };
 
