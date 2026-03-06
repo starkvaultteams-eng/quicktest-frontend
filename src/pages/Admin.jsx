@@ -312,18 +312,23 @@ export default function Admin() {
                           <div className="col-span-12 sm:col-span-2 text-sm">
                             {status === 'missing' ? (
                               <span className="text-red-500 font-bold">missing</span>
+                            ) : status === 'approved' ? (
+                              <span className="inline-flex px-2 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-300">
+                                approved
+                              </span>
                             ) : (
                               status || 'available'
                             )}
                           </div>
-                          <div className="col-span-12 sm:col-span-2 flex justify-end gap-2">
-                            <button
-                              onClick={() => handleApprove(p)}
-                              disabled={status === 'approved'}
-                              className="px-3 py-1 bg-emerald-600 text-white rounded-md disabled:opacity-50"
-                            >
-                              Approve
-                            </button>
+                          <div className="col-span-12 sm:col-span-2 flex flex-wrap justify-start sm:justify-end gap-2">
+                            {status !== 'approved' && (
+                              <button
+                                onClick={() => handleApprove(p)}
+                                className="px-3 py-1 bg-emerald-600 text-white rounded-md"
+                              >
+                                Approve
+                              </button>
+                            )}
                             <button onClick={() => handleDownload(p, href)} className="px-3 py-1 bg-slate-100 dark:bg-slate-800/50 rounded-md text-primary hover:underline">
                               Download
                             </button>

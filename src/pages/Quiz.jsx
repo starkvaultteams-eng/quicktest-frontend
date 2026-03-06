@@ -41,7 +41,19 @@ export default function Quiz() {
     quizAPI
       .getQuestions(course, topic, difficulty, count)
       .then((res) => {
-        setQuestions(res.data.questions || res.data);
+        const payload = res.data.questions || res.data;
+        const list = Array.isArray(payload) ? payload : [];
+        const guarded = course
+          ? list.filter((item) => String(item?.course || '') === String(course))
+          : list;
+        if (course && guarded.length !== list.length) {
+          console.warn('Filtered out cross-course questions from API payload', {
+            selectedCourse: course,
+            received: list.length,
+            kept: guarded.length,
+          });
+        }
+        setQuestions(guarded);
         // metadata endpoint isn't called here; keep empty unless dashboard
         // injected something later via state (unlikely).  We're just providing a
         // placeholder in case we want to reuse title map between pages.
