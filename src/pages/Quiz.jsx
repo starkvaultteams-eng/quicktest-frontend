@@ -141,6 +141,13 @@ export default function Quiz() {
 
   const q = questions[current];
   const percent = Math.round(((current + 1) / questions.length) * 100);
+  const optionEntries = ['A', 'B', 'C', 'D']
+    .map((opt) => ({
+      key: opt,
+      text: (q[`option_${opt.toLowerCase()}`] || '').trim(),
+    }))
+    .filter((opt) => opt.text && opt.text.toLowerCase() !== 'n/a');
+  const isTextResponse = optionEntries.length === 0;
 
   return (
     <div className="min-h-screen bg-background-light dark:bg-background-dark flex flex-col overflow-x-hidden text-slate-900 dark:text-slate-100">
@@ -187,10 +194,7 @@ export default function Quiz() {
         </div>
 
         {/* options grid or free‑response */}
-        {['A', 'B', 'C', 'D'].some((opt) => {
-          const t = q[`option_${opt.toLowerCase()}`] || '';
-          return t.toLowerCase() === 'n/a';
-        }) ? (
+        {isTextResponse ? (
           <div className="mb-12">
             <label className="block mb-2 font-medium">Your answer</label>
             <textarea
@@ -203,8 +207,7 @@ export default function Quiz() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
-            {['A', 'B', 'C', 'D'].map((opt) => {
-              const text = q[`option_${opt.toLowerCase()}`] || '';
+            {optionEntries.map(({ key: opt, text }) => {
               const selected = answers[current] === opt;
               return (
                 <label key={opt} className="group relative cursor-pointer">

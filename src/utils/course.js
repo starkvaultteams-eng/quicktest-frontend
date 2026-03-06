@@ -1,5 +1,5 @@
 export const COURSE_DISPLAY_MAP = {
-  'Information Literacy': 'Use of Library',
+  'Information Literacy': 'PUA-GST 121 Information Literacy',
 };
 
 export function formatCourseLabel(course, title) {

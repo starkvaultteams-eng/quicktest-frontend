@@ -11,7 +11,7 @@ const COURSE_OUTLINES = {
   // additional notes per course could go here
 };
 const COURSE_DISPLAY_MAP = {
-  'Information Literacy': 'Use of Library',
+  'Information Literacy': 'PUA-GST 121 Information Literacy',
 };
 
 export default function Dashboard() {
