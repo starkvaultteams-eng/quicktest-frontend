@@ -48,6 +48,7 @@ export default function Header() {
           <Link to="/history" className={navClass(location.pathname === '/history')}>History</Link>
           <Link to="/leaderboard" className={navClass(location.pathname === '/leaderboard')}>Leaderboard</Link>
           <Link to="/upload" className={navClass(location.pathname === '/upload')}>Upload</Link>
+          <Link to="/about" className={navClass(location.pathname === '/about')}>About</Link>
           {user?.isAdmin && (
             <Link to="/admin" className={navClass(location.pathname === '/admin')}>Admin</Link>
           )}
@@ -105,6 +106,7 @@ export default function Header() {
               <Link to="/history" className={mobileNavClass(location.pathname === '/history')}>History</Link>
               <Link to="/leaderboard" className={mobileNavClass(location.pathname === '/leaderboard')}>Leaderboard</Link>
               <Link to="/upload" className={mobileNavClass(location.pathname === '/upload')}>Upload</Link>
+              <Link to="/about" className={mobileNavClass(location.pathname === '/about')}>About</Link>
               {user?.isAdmin && (
                 <Link to="/admin" className={mobileNavClass(location.pathname === '/admin')}>Admin</Link>
               )}

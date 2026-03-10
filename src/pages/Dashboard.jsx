@@ -257,26 +257,50 @@ export default function Dashboard() {
                   </div>
                   <div className="flex flex-col gap-3">
                     <label className="text-sm font-medium">Quiz Mode</label>
-                    <label className="flex items-center gap-2 text-sm">
-                      <input
-                        type="checkbox"
-                        checked={smartReview}
-                        onChange={(e) => setSmartReview(e.target.checked)}
-                      />
-                      Smart Review (focus on questions you missed)
-                    </label>
-                    <label className="flex items-center gap-2 text-sm">
-                      <input
-                        type="checkbox"
-                        checked={balanceTopics}
-                        onChange={(e) => setBalanceTopics(e.target.checked)}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <button
+                        type="button"
+                        onClick={() => setSmartReview((v) => !v)}
+                        className={`text-left p-4 rounded-xl border transition ${
+                          smartReview
+                            ? 'border-primary bg-primary/10'
+                            : 'border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800/50'
+                        }`}
+                      >
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm font-semibold">Smart Review</span>
+                          <span className={`text-xs font-bold ${smartReview ? 'text-primary' : 'text-slate-400'}`}>
+                            {smartReview ? 'ON' : 'OFF'}
+                          </span>
+                        </div>
+                        <p className="text-xs text-slate-500 mt-2">
+                          Focus on questions you missed before.
+                        </p>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setBalanceTopics((v) => !v)}
                         disabled={topic !== 'All Topics'}
-                      />
-                      Balance topics across the quiz
-                    </label>
+                        className={`text-left p-4 rounded-xl border transition ${
+                          balanceTopics
+                            ? 'border-primary bg-primary/10'
+                            : 'border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800/50'
+                        } ${topic !== 'All Topics' ? 'opacity-60 cursor-not-allowed' : ''}`}
+                      >
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm font-semibold">Balanced Topics</span>
+                          <span className={`text-xs font-bold ${balanceTopics ? 'text-primary' : 'text-slate-400'}`}>
+                            {balanceTopics ? 'ON' : 'OFF'}
+                          </span>
+                        </div>
+                        <p className="text-xs text-slate-500 mt-2">
+                          Spread questions across topics when All Topics is selected.
+                        </p>
+                      </button>
+                    </div>
                     {topic !== 'All Topics' && (
                       <p className="text-xs text-slate-500">
-                        Topic balancing is available when “All Topics” is selected.
+                        Balanced Topics is available only when “All Topics” is selected.
                       </p>
                     )}
                   </div>

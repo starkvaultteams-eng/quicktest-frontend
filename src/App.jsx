@@ -15,6 +15,7 @@ import Admin from './pages/Admin';
 import History from './pages/History';
 import Leaderboard from './pages/Leaderboard';
 import Upload from './pages/Upload';
+import About from './pages/About';
 import NotFound from './pages/NotFound';
 
 function PrivateRoute({ children }) {
@@ -76,6 +77,11 @@ function AppRoutes() {
       <Route path="/upload" element={
         <PrivateRoute>
           <Upload />
+        </PrivateRoute>
+      } />
+      <Route path="/about" element={
+        <PrivateRoute>
+          <About />
         </PrivateRoute>
       } />
       
