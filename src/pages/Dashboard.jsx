@@ -16,6 +16,8 @@ export default function Dashboard() {
   const [topic, setTopic] = useState('');
   const [difficulty, setDifficulty] = useState('');
   const [count, setCount] = useState(10);
+  const [smartReview, setSmartReview] = useState(false);
+  const [balanceTopics, setBalanceTopics] = useState(false);
 
   // courseOptions now contains objects {value,label} so we can show friendly names
   const [courseOptions, setCourseOptions] = useState([]);
@@ -31,7 +33,7 @@ export default function Dashboard() {
     const safeTopic = topic === 'All Topics' ? undefined : topic;
     const safeDifficulty = difficulty === 'All Levels' ? undefined : difficulty;
     navigate('/quiz', {
-      state: { course, topic: safeTopic, difficulty: safeDifficulty, count },
+      state: { course, topic: safeTopic, difficulty: safeDifficulty, count, smartReview, balanceTopics },
     });
   };
 
@@ -249,6 +251,34 @@ export default function Dashboard() {
                     <p className="text-xs text-slate-500">
                       You can change the number of questions (1-50).
                     </p>
+                    <p className="text-xs text-slate-500">
+                      If the selected topic has fewer questions, we top up from the same course.
+                    </p>
+                  </div>
+                  <div className="flex flex-col gap-3">
+                    <label className="text-sm font-medium">Quiz Mode</label>
+                    <label className="flex items-center gap-2 text-sm">
+                      <input
+                        type="checkbox"
+                        checked={smartReview}
+                        onChange={(e) => setSmartReview(e.target.checked)}
+                      />
+                      Smart Review (focus on questions you missed)
+                    </label>
+                    <label className="flex items-center gap-2 text-sm">
+                      <input
+                        type="checkbox"
+                        checked={balanceTopics}
+                        onChange={(e) => setBalanceTopics(e.target.checked)}
+                        disabled={topic !== 'All Topics'}
+                      />
+                      Balance topics across the quiz
+                    </label>
+                    {topic !== 'All Topics' && (
+                      <p className="text-xs text-slate-500">
+                        Topic balancing is available when “All Topics” is selected.
+                      </p>
+                    )}
                   </div>
                 </div>
 

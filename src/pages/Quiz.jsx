@@ -36,9 +36,9 @@ export default function Quiz() {
       return;
     }
 
-    const { course, topic, difficulty, count } = params;
+    const { course, topic, difficulty, count, smartReview, balanceTopics } = params;
     quizAPI
-      .getQuestions(course, topic, difficulty, count)
+      .getQuestions(course, topic, difficulty, count, { smartReview, balanceTopics })
       .then((res) => {
         const payload = res.data.questions || res.data;
         const list = Array.isArray(payload) ? payload : [];

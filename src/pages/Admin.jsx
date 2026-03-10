@@ -11,6 +11,9 @@ export default function Admin() {
   const [error, setError] = useState('');
   const [loadingData, setLoadingData] = useState(true);
   const [syncingQuestions, setSyncingQuestions] = useState(false);
+  const [questionReview, setQuestionReview] = useState([]);
+  const [loadingReview, setLoadingReview] = useState(false);
+  const [reviewError, setReviewError] = useState('');
 
   const refreshData = async () => {
     setLoadingData(true);
@@ -47,8 +50,24 @@ export default function Admin() {
     }
   };
 
+  const refreshQuestionReview = async () => {
+    setLoadingReview(true);
+    setReviewError('');
+    try {
+      const res = await adminAPI.getQuestionReviewQueue({ limit: 20 });
+      const items = res?.data?.items || [];
+      setQuestionReview(items);
+    } catch (e) {
+      console.error(e);
+      setReviewError('Failed to load question review queue');
+    } finally {
+      setLoadingReview(false);
+    }
+  };
+
   useEffect(() => {
     refreshData();
+    refreshQuestionReview();
   }, []);
 
   const apiBase = (() => {
@@ -139,12 +158,28 @@ export default function Admin() {
       const skipped = res?.data?.skipped ?? 0;
       localStorage.removeItem('metadataCache');
       await refreshData();
+      await refreshQuestionReview();
       alert(`Question bank synced. Inserted: ${inserted}, Skipped: ${skipped}`);
     } catch (e) {
       console.error('question sync failed', e);
       alert('Question sync failed');
     } finally {
       setSyncingQuestions(false);
+    }
+  };
+
+  const handleQualityScan = async () => {
+    setLoadingReview(true);
+    try {
+      const res = await adminAPI.scanQuestionQuality({ limit: 1000 });
+      const updated = res?.data?.updated ?? 0;
+      await refreshQuestionReview();
+      alert(`Quality scan complete. Updated: ${updated}`);
+    } catch (e) {
+      console.error('quality scan failed', e);
+      alert('Quality scan failed');
+    } finally {
+      setLoadingReview(false);
     }
   };
 
@@ -344,6 +379,61 @@ export default function Admin() {
                     )}
                   </div>
                 </div>
+              </section>
+
+              <section className="space-y-4">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                  <h2 className="text-2xl font-bold">Question Quality Review</h2>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={refreshQuestionReview}
+                      className="px-3 py-1 bg-primary text-white rounded-md text-sm hover:bg-primary/90 transition"
+                      disabled={loadingReview}
+                    >
+                      Refresh
+                    </button>
+                    <button
+                      onClick={handleQualityScan}
+                      className="px-3 py-1 bg-slate-100 dark:bg-slate-800/50 rounded-md text-sm hover:underline"
+                      disabled={loadingReview}
+                    >
+                      Run Scan
+                    </button>
+                  </div>
+                </div>
+                {reviewError && <p className="text-red-500">{reviewError}</p>}
+                {loadingReview ? (
+                  <p className="text-sm text-slate-500">Loading review queue...</p>
+                ) : questionReview.length === 0 ? (
+                  <p className="text-sm text-slate-500">No questions need review.</p>
+                ) : (
+                  <div className="space-y-2">
+                    {questionReview.map((q) => (
+                      <div
+                        key={q._id}
+                        className="p-4 rounded-xl border border-primary/20 bg-primary/5"
+                      >
+                        <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500 mb-2">
+                          <span className="font-bold text-slate-700 dark:text-slate-200">
+                            {q.course}
+                          </span>
+                          <span>•</span>
+                          <span>{q.topic}</span>
+                          <span>•</span>
+                          <span>Score: {q.qualityScore ?? 'n/a'}</span>
+                        </div>
+                        <p className="text-sm text-slate-800 dark:text-slate-200 line-clamp-2">
+                          {q.question_latex}
+                        </p>
+                        {Array.isArray(q.qualityIssues) && q.qualityIssues.length > 0 && (
+                          <p className="text-xs text-red-500 mt-2">
+                            Issues: {q.qualityIssues.join(', ')}
+                          </p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
               </section>
             </>
           )}

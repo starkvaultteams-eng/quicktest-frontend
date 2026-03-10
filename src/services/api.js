@@ -59,19 +59,25 @@ async function uploadWithRetry(endpoint, file, retries = 1) {
 }
 
 export const quizAPI = {
-  getQuestions: (course, topic, difficulty, count) => {
+  getQuestions: (course, topic, difficulty, count, options = {}) => {
     const params = {};
     if (course) params.course = course;
     // backend treats any non-empty topic as filter, so ignore the 'All Topics' sentinel
     if (topic && topic !== 'All Topics') params.topic = topic;
     if (difficulty && difficulty !== 'All Levels') params.difficulty = difficulty.toLowerCase();
     if (count) params.limit = count;
-    return api.get('/questions', { params });
+    if (options.balanceTopics) params.balanceTopics = true;
+    const endpoint = options.smartReview ? '/questions/review' : '/questions';
+    return api.get(endpoint, { params });
   },
   getMetadata: () => api.get('/metadata'),
   submitAnswers: (answers) => api.post('/submit', { answers }),
   getMyAttempts: (params = {}) => api.get('/my-attempts', { params }),
-  getLeaderboard: () => api.get('/leaderboard'),
+  getLeaderboard: (season) => {
+    const params = {};
+    if (season) params.season = season;
+    return api.get('/leaderboard', { params });
+  },
   uploadPDF: (file) => uploadWithRetry('/upload-pdf', file, 1),
   getMyUploads: () => api.get('/my-uploads'),
 };
@@ -84,6 +90,8 @@ export const adminAPI = {
   uploadPDF: (file) => uploadWithRetry('/upload-pdf', file, 1),
   updateUploadedPDFStatus: (id, status) => api.patch(`/admin/uploads/${id}`, { status }),
   deleteUploadedPDF: (id) => api.delete(`/admin/uploads/${id}`),
+  getQuestionReviewQueue: (params = {}) => api.get('/admin/questions/review', { params }),
+  scanQuestionQuality: (payload = {}) => api.post('/admin/questions/quality-scan', payload),
 };
 
 export default api;
