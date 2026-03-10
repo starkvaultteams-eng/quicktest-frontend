@@ -40,7 +40,7 @@ export default function Dashboard() {
   // optional view courses list (for debug or outline display)
   const [allCourses, setAllCourses] = useState([]);
   const [showCourses, setShowCourses] = useState(false);
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const [myUploads, setMyUploads] = useState([]);
   const [uploading, setUploading] = useState(false);
 
@@ -48,12 +48,14 @@ export default function Dashboard() {
     setLoadingMeta(true);
     setMetaError('');
     let hydratedFromCache = false;
+    let cachedSnapshot = null;
 
     // try cache first (also handle old cache shape which stored questions)
     try {
       const cachedRaw = localStorage.getItem('metadataCache');
       if (cachedRaw) {
         const cached = JSON.parse(cachedRaw);
+        cachedSnapshot = cached;
         const age = Date.now() - (cached.time || 0);
         if (age < 15 * 60 * 1000) {
           if (cached.courses && cached.topics) {
@@ -101,10 +103,21 @@ export default function Dashboard() {
       processMetadata({ courses, topics, topicsByCourse, difficulties, courseTitles });
     } catch (e) {
       console.error('error fetching metadata', e);
+      if (e.response?.status === 401 || e.response?.status === 403) {
+        logout();
+        navigate('/login');
+        return;
+      }
+      if (!hydratedFromCache && cachedSnapshot && cachedSnapshot.courses && cachedSnapshot.topics) {
+        processMetadata(cachedSnapshot);
+        setMetaError('Showing cached courses. Live data is unavailable right now.');
+        return;
+      }
       if (e.response?.status === 404) {
         navigate('/404');
         return;
       }
+      setShowCourses(true);
       setMetaError('Failed to load course information. Please try again.');
     } finally {
       setLoadingMeta(false);
@@ -170,7 +183,18 @@ export default function Dashboard() {
               <div className="animate-spin h-10 w-10 border-4 border-primary border-t-transparent rounded-full" />
             </div>
           )}
-          {metaError && <p className="text-red-500 mb-4">{metaError}</p>}
+          {metaError && (
+            <div className="mb-4 flex flex-col sm:flex-row sm:items-center gap-3">
+              <p className="text-red-500">{metaError}</p>
+              <button
+                type="button"
+                onClick={fetchMetadata}
+                className="px-3 py-1 bg-primary text-white rounded-md text-sm hover:bg-primary/90 transition"
+              >
+                Retry
+              </button>
+            </div>
+          )}
           {!loadingMeta && !metaError && (
             <p className="text-sm text-slate-500 mb-4">
               {/* Note: current dataset only contains 100‑level courses (100L). These
@@ -191,11 +215,17 @@ export default function Dashboard() {
                         onChange={(e) => setCourse(e.target.value)}
                         className="w-full bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 focus:ring-primary focus:border-primary"
                       >
-                        {courseOptions.map((opt) => (
-                          <option key={opt.value} value={opt.value}>
-                            {opt.label}
+                        {courseOptions.length === 0 ? (
+                          <option value="" disabled>
+                            No courses available
                           </option>
-                        ))}
+                        ) : (
+                          courseOptions.map((opt) => (
+                            <option key={opt.value} value={opt.value}>
+                              {opt.label}
+                            </option>
+                          ))
+                        )}
                       </select>
                     </div>
 
@@ -206,9 +236,13 @@ export default function Dashboard() {
                         onChange={(e) => setTopic(e.target.value)}
                         className="w-full bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 focus:ring-primary focus:border-primary"
                       >
-                        {topicOptions.map((t) => (
-                          <option key={t}>{t}</option>
-                        ))}
+                        {topicOptions.length === 0 ? (
+                          <option value="All Topics">All Topics</option>
+                        ) : (
+                          topicOptions.map((t) => (
+                            <option key={t}>{t}</option>
+                          ))
+                        )}
                       </select>
                       {course === 'Math' && (
                         <p className="mt-1 text-xs text-slate-500 italic">
@@ -221,7 +255,7 @@ export default function Dashboard() {
                   <div className="flex flex-col gap-2">
                     <label className="text-sm font-medium">Difficulty</label>
                     <div className="grid grid-cols-3 gap-3">
-                      {difficultyOptions.map((d) => (
+                      {(difficultyOptions.length ? difficultyOptions : ['All Levels']).map((d) => (
                         <button
                           key={d}
                           type="button"
@@ -347,23 +381,27 @@ export default function Dashboard() {
                 "Upload" page; once higher‑level content is added,
                 new courses and difficulties will appear here automatically.
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                {allCourses.map((c) => (
-                  <div
-                    key={c}
-                    className="glass-card rounded-2xl p-4 border border-primary/20"
-                  >
-                    <h3 className="font-bold text-lg mb-2">
-                      {formatCourseFullLabel(c, courseTitlesMap[c])}
-                    </h3>
-                    <ul className="list-disc list-inside text-sm ml-4">
-                      {(COURSE_OUTLINES[c] || []).map((t) => (
-                        <li key={t}>{t}</li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
+              {allCourses.length === 0 ? (
+                <p className="text-sm text-slate-500">No courses available yet. Ask an admin to sync the question bank.</p>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  {allCourses.map((c) => (
+                    <div
+                      key={c}
+                      className="glass-card rounded-2xl p-4 border border-primary/20"
+                    >
+                      <h3 className="font-bold text-lg mb-2">
+                        {formatCourseFullLabel(c, courseTitlesMap[c])}
+                      </h3>
+                      <ul className="list-disc list-inside text-sm ml-4">
+                        {(COURSE_OUTLINES[c] || []).map((t) => (
+                          <li key={t}>{t}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           )}
 
