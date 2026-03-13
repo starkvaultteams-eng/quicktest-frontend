@@ -43,6 +43,13 @@ export default function Dashboard() {
   const { user, logout } = useAuth();
   const [myUploads, setMyUploads] = useState([]);
   const [uploading, setUploading] = useState(false);
+  const normalizeCourseValue = (value) => {
+    const raw = String(value || '').trim();
+    if (!raw) return raw;
+    if (/^(Computer Science|CSC 101)$/i.test(raw)) return 'CST 101';
+    if (/^CST 101 \\(Health Science\\)$/i.test(raw)) return 'CST 101 (Health Sciences)';
+    return raw;
+  };
 
   const fetchMetadata = async () => {
     setLoadingMeta(true);
@@ -135,14 +142,18 @@ export default function Dashboard() {
     // still works (it'll just show "All Topics" only).
     const courseMap = {};
     courses.forEach((c) => {
-      courseMap[c] = topicsByCourse[c] || [];
+      const normalized = normalizeCourseValue(c);
+      if (!normalized) return;
+      const topicsForCourse = topicsByCourse[c] || topicsByCourse[normalized] || [];
+      courseMap[normalized] = Array.from(new Set([...(courseMap[normalized] || []), ...topicsForCourse]));
     });
 
+    const uniqueCourses = Array.from(new Set(courses.map(normalizeCourseValue).filter(Boolean)));
     const uniqueTopics = ['All Topics', ...new Set(topics)];
 
-    const mappedCourses = courses.map((c) => ({
+    const mappedCourses = uniqueCourses.map((c) => ({
       value: c,
-      label: formatCourseFullLabel(c, courseTitles[c]),
+      label: formatCourseFullLabel(c, courseTitles[c] || courseTitles[normalizeCourseValue(c)]),
     }));
 
     setCourseOptions(mappedCourses);
@@ -150,7 +161,7 @@ export default function Dashboard() {
     setTopicOptions(uniqueTopics);
     setDifficultyOptions(['All Levels', ...diffs]);
     setCourseTitlesMap(courseTitles); // remember for display cards
-    setAllCourses(courses);
+    setAllCourses(uniqueCourses);
     setShowCourses(true);
     if (mappedCourses.length && !course) setCourse(mappedCourses[0].value);
     if (uniqueTopics.length && !topic) setTopic('All Topics');
