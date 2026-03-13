@@ -1,6 +1,8 @@
 export const COURSE_CODE_MAP = {
   Math: 'MTH 101',
-  'Computer Science': 'CSC 101',
+  'Computer Science': 'CST 101',
+  'CST 101': 'CST 101',
+  'CST 101 (Health Sciences)': 'CST 101 (Health Sciences)',
   'CHM 101': 'CHM 101',
   'CHM 107': 'CHM 107',
   'Information Literacy': 'GST 121',
